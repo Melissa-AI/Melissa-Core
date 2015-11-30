@@ -34,6 +34,14 @@ def tts(message):
     elif sys.platform == 'linux2' or sys.platform == 'linux':
         tts_engine = 'espeak'
         return os.system(tts_engine + ' "' + message + '"')
+        
+def music_player(file_name):
+    if sys.platform == 'darwin':
+        player = 'afplay ' + file_name
+        return os.system(player)
+    elif sys.platform == 'linux2' or sys.platform == 'linux':
+        player = 'mpg123 ' + file_name
+        return os.system(player)
 
 tts('Welcome ' + name + ', systems are now ready to run. How can I help you?')
 
@@ -91,7 +99,7 @@ elif check_message(['play', 'music']) or check_message(['music']):
 
     music_playing = mp3gen()
     tts("Now playing: " + music_playing)
-    os.system("afplay " + music_playing)
+    music_player(music_playing)
 
 elif check_message(['how', 'weather']):
     weather_com_result = pywapi.get_weather_from_weather_com(city_code)
