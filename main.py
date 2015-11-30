@@ -1,6 +1,7 @@
 import os
 import sys
 import random
+from datetime import datetime
 
 import yaml
 import pywapi
@@ -77,6 +78,17 @@ if check_message(['who','are', 'you']):
     'Melissa, didnt I tell you before?',
     'You ask that so many times! I am Melissa.']
     tts(random.choice(messages))
+
+elif check_message(['how', 'I', 'look']) or check_message(['how', 'am', 'I']):
+    replies =['You are goddamn handsome!', 'My knees go weak when I see you.', 'You are sexy!', 'You are the kindest person that I have met.']
+    tts(random.choice(replies))
+
+elif check_message(['time']):
+    tts("The time is " + datetime.strftime(datetime.now(), '%H:%M:%S'))
+
+elif check_message(['tell', 'joke']):
+    jokes = ['What happens to a frogs car when it breaks down? It gets toad away.', 'Why was six scared of seven? Because seven ate nine.', 'What is the difference between snowmen and snowwomen? Snowballs.', 'No, I always forget the punch line.']
+    tts(random.choice(jokes))
 
 elif check_message(['who', 'am', 'I']):
     tts('You are ' + name + ', a brilliant person. I love you!')
