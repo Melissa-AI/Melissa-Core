@@ -1,15 +1,21 @@
 import os
 import sys
+import yaml
 import time
 import pywapi
 import random
 import speech_recognition as sr
 from selenium import webdriver
 
+profile = open('profile.yaml')
+profile_data = yaml.safe_load(profile)
+profile.close()
+
 # Functioning Variables
-name = 'Tanay'
-music_path = '.'
-city = 'INXX0096'
+name = profile_data['name']
+music_path = profile_data['music_path']
+city_name = profile_data['city_name']
+city_code = profile_data['city_code']
 
 def tts(message):
     if sys.platform == 'darwin':
@@ -54,8 +60,8 @@ elif r.recognize_google(audio)=='play music':
     os.system("afplay demons.mp3")
 
 elif r.recognize_google(audio)=='how is weather':
-    weather_com_result = pywapi.get_weather_from_weather_com(city)
-    weather_result = "Weather.com says: It is " + weather_com_result['current_conditions']['text'].lower() + " and " + weather_com_result['current_conditions']['temperature'] + "degree celcius now in New Delhi."
+    weather_com_result = pywapi.get_weather_from_weather_com(city_code)
+    weather_result = "Weather.com says: It is " + weather_com_result['current_conditions']['text'].lower() + " and " + weather_com_result['current_conditions']['temperature'] + "degree celcius now in " + city_name
     tts(weather_result)
     
 elif r.recognize_google(audio)=='connect to proxy':
