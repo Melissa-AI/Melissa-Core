@@ -1,5 +1,5 @@
 ## Melissa
-Melissa is a <del>virtual</del> assistant for OS X and Linux systems. She currently uses Google speech-to-text engine, OS X's `say` command or Linux's `espeak` command along with some magical scripting which makes her alive, developed by a group of sorcerers.
+Melissa is a <del>virtual</del> assistant for OS X and Linux systems. She currently uses Google speech-to-text engine, OS X's `say` command or Linux's `espeak` command along with some magical scripting which makes her alive, developed by [Tanay Pant](http://tanaypant.com) and a group of sorcerers.
 
 ### Installation
 #### For OS X Systems

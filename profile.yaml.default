@@ -6,3 +6,16 @@ city_name:
   New Delhi
 city_code:
   INXX0096
+proxy_username:
+  Something
+proxy_password:
+  Something
+twitter:
+  access_token:
+    Something
+  access_token_secret:
+    Something
+  consumer_key:
+    Something
+  consumer_secret:
+    Something
