@@ -13,10 +13,10 @@ pip install -r requirements.txt
 cp profile.yaml.default profile.yaml
 ```
 
-Manually install `pywapi` with the help of instructions provided [here](https://code.google.com/p/python-weather-api/).
+Manually install `pywapi` with the help of instructions provided [here](https://code.google.com/p/python-weather-api/). You will also need to install [PyAudio](http://people.csail.mit.edu/hubert/pyaudio/).
 
 #### For Linux Systems
-Install `git` and `espeak` using your distribution's package manager or build them from their binary files. Follow the same steps as OS X's installation system, starting from the second command.
+Install `git` and `espeak` using your distribution's package manager or build them from their binary files. Follow the same steps as OS X's installation system, starting from the second command till the manual installations.
 
 ### Configuration
 Once you have successfully set up your development environment, open `profile.yaml` to customise the file and add details about yourself.
