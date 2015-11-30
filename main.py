@@ -34,13 +34,13 @@ def tts(message):
     elif sys.platform == 'linux2' or sys.platform == 'linux':
         tts_engine = 'espeak'
         return os.system(tts_engine + ' "' + message + '"')
-        
+
 def music_player(file_name):
     if sys.platform == 'darwin':
         player = 'afplay ' + file_name
         return os.system(player)
     elif sys.platform == 'linux2' or sys.platform == 'linux':
-        player = 'mpg123 ' + file_name
+        player = 'mpg123 "%s"' % file_name
         return os.system(player)
 
 tts('Welcome ' + name + ', systems are now ready to run. How can I help you?')
