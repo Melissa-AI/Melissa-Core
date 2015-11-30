@@ -1,11 +1,10 @@
 import os
 import sys
-import yaml
-import time
-import pywapi
 import random
+
+import yaml
+import pywapi
 import tweepy
-import json
 import pyaudio
 from tweepy import OAuthHandler
 import speech_recognition as sr
@@ -28,6 +27,9 @@ consumer_key = profile_data['twitter']['consumer_key']
 consumer_secret = profile_data['twitter']['consumer_secret']
 
 def tts(message):
+    """
+    This function takes a message as an argument and converts it to speech depending on the OS.
+    """
     if sys.platform == 'darwin':
         tts_engine = 'say'
         return os.system(tts_engine + ' ' + message)
@@ -36,11 +38,14 @@ def tts(message):
         return os.system(tts_engine + ' "' + message + '"')
 
 def music_player(file_name):
+    """
+    This function takes the name of a music file as an argument and plays it depending on the OS.
+    """
     if sys.platform == 'darwin':
         player = 'afplay ' + file_name
         return os.system(player)
     elif sys.platform == 'linux2' or sys.platform == 'linux':
-        player = 'mpg123 "%s"' % file_name
+        player = 'mpg123 ' + file_name
         return os.system(player)
 
 tts('Welcome ' + name + ', systems are now ready to run. How can I help you?')
@@ -58,6 +63,9 @@ except sr.RequestError as e:
     print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
 def check_message(check):
+    """
+    This function checks if the items in the list (specified in argument) are present in the user's input speech.
+    """
     words_of_message = r.recognize_google(audio).split()
     if set(check).issubset(set(words_of_message)):
         return True
@@ -89,6 +97,9 @@ elif check_message(['my', 'tweets']):
 
 elif check_message(['play', 'music']) or check_message(['music']):
     def mp3gen():
+        """
+        This function finds all the mp3 files in a folder and it's subfolders and returns a random music filename.
+        """
         music_list = []
         for root, dirs, files in os.walk(music_path):
             for filename in files:
