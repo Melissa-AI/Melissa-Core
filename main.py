@@ -57,7 +57,8 @@ with sr.Microphone() as source:
     audio = r.listen(source)
 
 try:
-    print("Melissa thinks you said '" + r.recognize_google(audio) + "'")
+    speech_text = r.recognize_google(audio)
+    print("Melissa thinks you said '" + speech_text + "'")
 except sr.UnknownValueError:
     print("Melissa could not understand audio")
 except sr.RequestError as e:
@@ -67,7 +68,7 @@ def check_message(check):
     """
     This function checks if the items in the list (specified in argument) are present in the user's input speech.
     """
-    words_of_message = r.recognize_google(audio).split()
+    words_of_message = speech_text.split()
     if set(check).issubset(set(words_of_message)):
         return True
     else:
