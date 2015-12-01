@@ -142,10 +142,14 @@ elif check_message(['my', 'tweets']):
     timeline = api.user_timeline(count=10, include_rts=True)
 
 elif check_message(['play', 'music']) or check_message(['music']):
-    music_listing = mp3gen()
-    music_playing = random.choice(music_listing)
-    tts("Now playing: " + music_playing)
-    music_player(music_playing)
+    try:
+        music_listing = mp3gen()
+        music_playing = random.choice(music_listing)
+        tts("Now playing: " + music_playing)
+        music_player(music_playing)
+    except IndexError as e:
+        tts('No music files found.')
+        print("No music files found: {0}".format(e))
 
 elif check_message(['play']):
     words_of_message = speech_text.split()
