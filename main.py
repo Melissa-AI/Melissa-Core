@@ -45,10 +45,10 @@ def music_player(file_name):
     This function takes the name of a music file as an argument and plays it depending on the OS.
     """
     if sys.platform == 'darwin':
-        player = 'afplay ' + file_name
+        player = "afplay '" + file_name + "'"
         return os.system(player)
     elif sys.platform == 'linux2' or sys.platform == 'linux':
-        player = 'mpg123 ' + file_name
+        player = "mpg123 '" + file_name + "'"
         return os.system(player)
 
 tts('Welcome ' + name + ', systems are now ready to run. How can I help you?')
@@ -59,7 +59,7 @@ with sr.Microphone() as source:
     audio = r.listen(source)
 
 try:
-    speech_text = r.recognize_google(audio)
+    speech_text = r.recognize_google(audio).lower()
     print("Melissa thinks you said '" + speech_text + "'")
 except sr.UnknownValueError:
     print("Melissa could not understand audio")
@@ -76,13 +76,24 @@ def check_message(check):
     else:
         return False
 
+def mp3gen():
+    """
+    This function finds all the mp3 files in a folder and it's subfolders and returns a list.
+    """
+    music_list = []
+    for root, dirs, files in os.walk(music_path):
+        for filename in files:
+            if os.path.splitext(filename)[1] == ".mp3":
+                music_list.append(os.path.join(root, filename.lower()))
+    return music_list
+
 if check_message(['who','are', 'you']):
     messages = ['I am Melissa, your lovely personal assistant.',
     'Melissa, didnt I tell you before?',
     'You ask that so many times! I am Melissa.']
     tts(random.choice(messages))
 
-elif check_message(['how', 'I', 'look']) or check_message(['how', 'am', 'I']):
+elif check_message(['how', 'i', 'look']) or check_message(['how', 'am', 'i']):
     replies =['You are goddamn handsome!', 'My knees go weak when I see you.', 'You are sexy!', 'You are the kindest person that I have met.']
     tts(random.choice(replies))
 
@@ -113,7 +124,7 @@ elif check_message(['tell', 'joke']):
     jokes = ['What happens to a frogs car when it breaks down? It gets toad away.', 'Why was six scared of seven? Because seven ate nine.', 'What is the difference between snowmen and snowwomen? Snowballs.', 'No, I always forget the punch line.']
     tts(random.choice(jokes))
 
-elif check_message(['who', 'am', 'I']):
+elif check_message(['who', 'am', 'i']):
     tts('You are ' + name + ', a brilliant person. I love you!')
 
 elif check_message(['where', 'born']):
@@ -131,21 +142,20 @@ elif check_message(['my', 'tweets']):
     timeline = api.user_timeline(count=10, include_rts=True)
 
 elif check_message(['play', 'music']) or check_message(['music']):
-    def mp3gen():
-        """
-        This function finds all the mp3 files in a folder and it's subfolders and returns a random music filename.
-        """
-        music_list = []
-        for root, dirs, files in os.walk(music_path):
-            for filename in files:
-                if os.path.splitext(filename)[1] == ".mp3":
-                    music_list.append(os.path.join(root, filename))
-        music_play = random.choice(music_list)
-        return music_play
-
-    music_playing = mp3gen()
+    music_listing = mp3gen()
+    music_playing = random.choice(music_listing)
     tts("Now playing: " + music_playing)
     music_player(music_playing)
+
+elif check_message(['play']):
+    words_of_message = speech_text.split()
+    words_of_message.remove('play')
+    cleaned_message = ' '.join(words_of_message)
+    music_listing = mp3gen()
+
+    for i in range(0, len(music_listing)):
+        if cleaned_message in music_listing[i]:
+            music_player(music_listing[i])
 
 elif check_message(['how', 'weather']):
     weather_com_result = pywapi.get_weather_from_weather_com(city_code)
