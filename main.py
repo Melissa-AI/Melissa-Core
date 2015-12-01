@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 import random
 from datetime import datetime
@@ -7,6 +8,7 @@ import yaml
 import pywapi
 import tweepy
 import pyaudio
+import wikipedia
 from tweepy import OAuthHandler
 import speech_recognition as sr
 from selenium import webdriver
@@ -84,6 +86,26 @@ elif check_message(['how', 'I', 'look']) or check_message(['how', 'am', 'I']):
     replies =['You are goddamn handsome!', 'My knees go weak when I see you.', 'You are sexy!', 'You are the kindest person that I have met.']
     tts(random.choice(replies))
 
+elif check_message(['define']):
+    words_of_message = speech_text.split()
+    words_of_message.remove('define')
+    cleaned_message = ' '.join(words_of_message)
+
+    try:
+        wiki_data = wikipedia.summary(cleaned_message, sentences=5)
+
+        regEx = re.compile(r'([^\(]*)\([^\)]*\) *(.*)')
+        m = regEx.match(wiki_data)
+        while m:
+            wiki_data = m.group(1) + m.group(2)
+            m = regEx.match(wiki_data)
+
+        wiki_data = wiki_data.replace("'", "")
+        tts(wiki_data)
+    except wikipedia.exceptions.DisambiguationError as e:
+        tts('Can you please be more specific? You may choose something from the following.')
+        print("Could not request results from Google Speech Recognition service; {0}".format(e))
+
 elif check_message(['time']):
     tts("The time is " + datetime.strftime(datetime.now(), '%H:%M:%S'))
 
@@ -106,7 +128,7 @@ elif check_message(['my', 'tweets']):
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
-    timeline = api.user_timeline(count = 10, include_rts = True)
+    timeline = api.user_timeline(count=10, include_rts=True)
 
 elif check_message(['play', 'music']) or check_message(['music']):
     def mp3gen():
