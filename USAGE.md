@@ -1,10 +1,13 @@
-## Melissa (Usage)
+## Melissa (Usage aka Dating Guide)
 
 Here are some sample dialogues that you can use when talking to Melissa (so much for people not reading Dating Guides).
 
 > who are you?
+>
 > how do I look?
+>
 > who am I?
+>
 > where were you born?
 
 Take notes for later use:
@@ -12,7 +15,9 @@ Take notes for later use:
 
 Retrieve the saved notes:
 > show all notes
+>
 > all notes
+>
 > notes
 
 Retrieve the description of something from Wikipedia:
@@ -20,15 +25,19 @@ Retrieve the description of something from Wikipedia:
 
 Ask time:
 >what is time
+>
 >time
 
 Ask to tell a joke:
 >tell me a joke
+>
 >tell joke
 
 Play random music:
 >play some music
+>
 >play music
+>
 >music
 
 Play specific music:
@@ -36,6 +45,7 @@ Play specific music:
 
 Get weather updates:
 >how is weather?
+>
 >how's weather?
 
 Open Firefox:
@@ -43,4 +53,5 @@ Open Firefox:
 
 Drop Melissa home after date:
 > go to sleep
+>
 > sleep
