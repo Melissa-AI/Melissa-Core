@@ -7,16 +7,20 @@ Clone the project using `git`. You can install git and other CLI developer tools
 
 ```
 xcode-select --install
-git clone https://github.com/tanay1337/Melissa.git
-cd Melissa
-pip install -r requirements.txt
-cp profile.yaml.default profile.yaml
 ```
 
-You will also need to install [PortAudio](http://www.portaudio.com/download.html) and [PyAudio](http://people.csail.mit.edu/hubert/pyaudio/).
+You will need to install [PortAudio](http://www.portaudio.com/download.html) and [PyAudio](http://people.csail.mit.edu/hubert/pyaudio/). Now run the following commands:
+
+```
+git clone https://github.com/tanay1337/Melissa.git
+cd Melissa
+pip install -r requirements.txt --allow-external pywapi --allow-unverified pywapi
+cp profile.yaml.default profile.yaml
+cp memory.db.default memory.db
+```
 
 #### For Linux Systems
-Install `git` and `espeak` using your distribution's package manager or build them from their binary files. Follow the same steps as OS X's installation system, starting from the second command till the manual installations. To play music, you will have to install [mpg123](http://www.mpg123.de).
+Install `git` and `espeak` using your distribution's package manager or build them from their binary files. Follow the same steps as OS X's installation system, starting from installing PortAudio and PyAudio. To play music, you will have to install [mpg123](http://www.mpg123.de).
 
 ### Configuration
 Once you have successfully set up your development environment, open `profile.yaml` to customise the file and add details about yourself.

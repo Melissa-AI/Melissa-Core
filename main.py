@@ -2,6 +2,7 @@ import os
 import re
 import sys
 import random
+import sqlite3
 from datetime import datetime
 
 import yaml
@@ -28,6 +29,8 @@ access_token = profile_data['twitter']['access_token']
 access_token_secret = profile_data['twitter']['access_token_secret']
 consumer_key = profile_data['twitter']['consumer_key']
 consumer_secret = profile_data['twitter']['consumer_secret']
+
+conn = sqlite3.connect('memory.db')
 
 def tts(message):
     """
@@ -59,7 +62,7 @@ with sr.Microphone() as source:
     audio = r.listen(source)
 
 try:
-    speech_text = r.recognize_google(audio).lower()
+    speech_text = r.recognize_google(audio).lower().replace("'", "")
     print("Melissa thinks you said '" + speech_text + "'")
 except sr.UnknownValueError:
     print("Melissa could not understand audio")
@@ -96,6 +99,28 @@ if check_message(['who','are', 'you']):
 elif check_message(['how', 'i', 'look']) or check_message(['how', 'am', 'i']):
     replies =['You are goddamn handsome!', 'My knees go weak when I see you.', 'You are sexy!', 'You are the kindest person that I have met.']
     tts(random.choice(replies))
+
+elif check_message(['all', 'note']) or check_message(['all', 'notes']) or check_message(['notes']):
+    tts('Your notes are as follows:')
+
+    cursor = conn.execute("SELECT notes FROM notes")
+
+    for row in cursor:
+        tts(row[0])
+
+    conn.commit()
+    conn.close()
+
+elif check_message(['note']):
+    words_of_message = speech_text.split()
+    words_of_message.remove('note')
+    cleaned_message = ' '.join(words_of_message)
+
+    conn.execute("INSERT INTO notes (notes, notes_date) VALUES (?, ?)", (cleaned_message, datetime.strftime(datetime.now(), '%d-%m-%Y')))
+    conn.commit()
+    conn.close()
+
+    tts('Your note has been saved.')
 
 elif check_message(['define']):
     words_of_message = speech_text.split()
