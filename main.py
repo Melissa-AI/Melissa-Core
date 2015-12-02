@@ -1,10 +1,14 @@
 import os
 import re
 import sys
+import time
 import random
 import sqlite3
+import audioop
+import tempfile
 from datetime import datetime
 
+import wave
 import yaml
 import pywapi
 import tweepy
@@ -30,8 +34,6 @@ access_token_secret = profile_data['twitter']['access_token_secret']
 consumer_key = profile_data['twitter']['consumer_key']
 consumer_secret = profile_data['twitter']['consumer_secret']
 
-conn = sqlite3.connect('memory.db')
-
 def tts(message):
     """
     This function takes a message as an argument and converts it to speech depending on the OS.
@@ -56,8 +58,88 @@ def music_player(file_name):
 
 tts('Welcome ' + name + ', systems are now ready to run. How can I help you?')
 
-while True:
-    speech_text = None
+# Thanks to Jasper for passive code snippet.
+
+_audio = pyaudio.PyAudio()
+
+def getScore(data):
+    rms = audioop.rms(data, 2)
+    score = rms / 3
+    return score
+
+def fetchThreshold():
+    THRESHOLD_MULTIPLIER = 1.8
+    RATE = 16000
+    CHUNK = 1024
+    THRESHOLD_TIME = 1
+
+    stream = _audio.open(format=pyaudio.paInt16,channels=1,rate=RATE,input=True,frames_per_buffer=CHUNK)
+
+    frames = []
+    lastN = [i for i in range(20)]
+
+    for i in range(0, RATE / CHUNK * THRESHOLD_TIME):
+        data = stream.read(CHUNK)
+        frames.append(data)
+
+        lastN.pop(0)
+        lastN.append(getScore(data))
+        average = sum(lastN) / len(lastN)
+
+    stream.stop_stream()
+    stream.close()
+
+    THRESHOLD = average * THRESHOLD_MULTIPLIER
+    return THRESHOLD
+
+
+def passiveListen():
+    THRESHOLD_MULTIPLIER = 1.8
+    RATE = 16000
+    CHUNK = 1024
+    THRESHOLD_TIME = 1
+    LISTEN_TIME = 300
+
+    stream = _audio.open(format=pyaudio.paInt16,
+                              channels=1,
+                              rate=RATE,
+                              input=True,
+                              frames_per_buffer=CHUNK)
+
+    frames = []
+    lastN = [i for i in range(30)]
+
+    for i in range(0, RATE / CHUNK * THRESHOLD_TIME):
+        data = stream.read(CHUNK)
+        frames.append(data)
+
+        lastN.pop(0)
+        lastN.append(getScore(data))
+        average = sum(lastN) / len(lastN)
+
+    THRESHOLD = average * THRESHOLD_MULTIPLIER
+    frames = []
+    didDetect = False
+
+    for i in range(0, RATE / CHUNK * LISTEN_TIME):
+        data = stream.read(CHUNK)
+        frames.append(data)
+        score = getScore(data)
+
+        if score > THRESHOLD:
+            didDetect = True
+            stream.stop_stream()
+            stream.close()
+            time.sleep(1)
+            tts('Yes?')
+            main()
+
+    if not didDetect:
+        print "No disturbance detected"
+        stream.stop_stream()
+        stream.close()
+
+def main():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Say something!")
@@ -75,14 +157,12 @@ while True:
         """
         This function checks if the items in the list (specified in argument) are present in the user's input speech.
         """
-        if speech_text == None:
-            sys.exit()
+
+        words_of_message = speech_text.split()
+        if set(check).issubset(set(words_of_message)):
+            return True
         else:
-            words_of_message = speech_text.split()
-            if set(check).issubset(set(words_of_message)):
-                return True
-            else:
-                return False
+            return False
 
     def mp3gen():
         """
@@ -106,6 +186,7 @@ while True:
         tts(random.choice(replies))
 
     elif check_message(['all', 'note']) or check_message(['all', 'notes']) or check_message(['notes']):
+        conn = sqlite3.connect('memory.db')
         tts('Your notes are as follows:')
 
         cursor = conn.execute("SELECT notes FROM notes")
@@ -117,6 +198,7 @@ while True:
         conn.close()
 
     elif check_message(['note']):
+        conn = sqlite3.connect('memory.db')
         words_of_message = speech_text.split()
         words_of_message.remove('note')
         cleaned_message = ' '.join(words_of_message)
@@ -191,7 +273,7 @@ while True:
             if cleaned_message in music_listing[i]:
                 music_player(music_listing[i])
 
-    elif check_message(['how', 'weather']):
+    elif check_message(['how', 'weather']) or check_message(['hows', 'weather']):
         weather_com_result = pywapi.get_weather_from_weather_com(city_code)
         weather_result = "Weather.com says: It is " + weather_com_result['current_conditions']['text'].lower() + " and " + weather_com_result['current_conditions']['temperature'] + "degree celcius now in " + city_name
         tts(weather_result)
@@ -209,13 +291,16 @@ while True:
 
         browser.find_element_by_name('btnSubmit').click()
 
-
-    elif check_message(['bye']) or check_message(['goodbye']):
-        tts('Goodbye!')
-
-    elif check_message(['open', 'Firefox']):
+    elif check_message(['open', 'firefox']):
         tts('Aye aye captain, opening Firefox')
         webdriver.Firefox()
 
+    elif check_message(['sleep']):
+        tts('Goodbye! Have a nice day!')
+        quit()
     else:
         tts('I dont know what that means!')
+
+    passiveListen()
+
+main()
