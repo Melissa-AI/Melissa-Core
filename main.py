@@ -1,3 +1,4 @@
+import sys
 import time
 import audioop
 import tempfile
@@ -111,21 +112,31 @@ def passiveListen():
         stream.close()
 
 def main():
-    r = sr.Recognizer()
-    with sr.Microphone() as source:
-        print("Say something!")
-        audio = r.listen(source)
-
     try:
-        speech_text = r.recognize_google(audio).lower().replace("'", "")
-        print("Melissa thinks you said '" + speech_text + "'")
-    except sr.UnknownValueError:
-        print("Melissa could not understand audio")
-    except sr.RequestError as e:
-        print("Could not request results from Google Speech Recognition service; {0}".format(e))
+        if sys.argv[1] == '--text' or sys.argv[1] == '-t':
+            text_mode = True
+            speech_text = raw_input("Write something: ").lower().replace("'", "")
+    except IndexError:
+        text_mode = False
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            print("Say something!")
+            audio = r.listen(source)
+
+        try:
+            speech_text = r.recognize_google(audio).lower().replace("'", "")
+            print("Melissa thinks you said '" + speech_text + "'")
+        except sr.UnknownValueError:
+            print("Melissa could not understand audio")
+        except sr.RequestError as e:
+            print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
     play_music.mp3gen(music_path)
     brain(name, speech_text, music_path, city_name, city_code, proxy_username, proxy_password)
-    passiveListen()
+
+    if text_mode:
+        main()
+    else:
+        passiveListen()
 
 main()
