@@ -22,4 +22,4 @@ def define_subject(speech_text):
         tts(wiki_data)
     except wikipedia.exceptions.DisambiguationError as e:
         tts('Can you please be more specific? You may choose something from the following.')
-        print("Could not request results from Google Speech Recognition service; {0}".format(e))
+        print("Can you please be more specific? You may choose something from the following; {0}".format(e))
