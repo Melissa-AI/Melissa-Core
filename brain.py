@@ -1,4 +1,4 @@
-from GreyMatter import notes, define_subject, tell_time, general_conversations, twitter_pull, play_music, weather, connect_proxy, open_firefox, sleep
+from GreyMatter import notes, define_subject, tell_time, general_conversations, twitter_pull, play_music, weather, connect_proxy, open_firefox, sleep, business_news_reader
 
 def brain(name, speech_text, music_path, city_name, city_code, proxy_username, proxy_password):
     def check_message(check):
@@ -14,6 +14,9 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
 
     if check_message(['who','are', 'you']):
         general_conversations.who_are_you()
+
+    elif check_message(['business', 'news']):
+        business_news_reader.news_reader()
 
     elif check_message(['how', 'i', 'look']) or check_message(['how', 'am', 'i']):
         general_conversations.how_am_i()
