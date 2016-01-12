@@ -26,6 +26,13 @@ Retrieve the description of something from Wikipedia:
 define some text here
 ```
 
+Listen to business news:
+```
+read business news
+today's business news
+business news
+```
+
 Ask time:
 ```
 what is time
