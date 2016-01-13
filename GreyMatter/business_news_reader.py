@@ -1,5 +1,3 @@
-import json
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -26,8 +24,8 @@ for i in range(1, 2):
     for news_details in soup.find_all('p', 'intro'):
         news_details_list.append(news_details.get_text())
 
-news_headlines_list_small = [element.lower() for element in news_headlines_list]
-news_details_list_small = [element.lower() for element in news_details_list]
+news_headlines_list_small = [element.lower().replace("(", "").replace(")", "").replace("'", "") for element in news_headlines_list]
+news_details_list_small = [element.lower().replace("(", "").replace(")", "").replace("'", "") for element in news_details_list]
 
 news_dictionary = dict(zip(news_headlines_list_small, news_details_list_small))
 
