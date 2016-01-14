@@ -12,7 +12,6 @@ def show_all_notes():
     for row in cursor:
         tts(row[0])
 
-    conn.commit()
     conn.close()
 
 def note_something(speech_text):
