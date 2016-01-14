@@ -45,6 +45,12 @@ tell me a joke
 tell joke
 ```
 
+Play shuffled music:
+```
+party time
+party mix
+```
+
 Play random music:
 ```
 play some music

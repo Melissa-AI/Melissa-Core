@@ -30,9 +30,6 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
     elif check_message(['define']):
         define_subject.define_subject(speech_text)
 
-    elif check_message(['time']):
-        tell_time.what_is_time()
-
     elif check_message(['tell', 'joke']):
         general_conversations.tell_joke()
 
@@ -48,6 +45,9 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
     elif check_message(['my', 'tweets']):
         twitter_pull.my_tweets()
 
+    elif check_message(['party', 'time']) or check_message(['party', 'mix']):
+        play_music.play_shuffle(music_path)
+
     elif check_message(['play', 'music']) or check_message(['music']):
         play_music.play_random(music_path)
 
@@ -62,6 +62,9 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
 
     elif check_message(['open', 'firefox']):
         open_firefox.open_firefox()
+
+    elif check_message(['time']):
+        tell_time.what_is_time()
 
     elif check_message(['sleep']):
         sleep.go_to_sleep()
