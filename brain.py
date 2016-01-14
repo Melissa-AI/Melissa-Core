@@ -1,6 +1,6 @@
-from GreyMatter import notes, define_subject, tell_time, general_conversations, twitter_pull, play_music, weather, connect_proxy, open_firefox, sleep, business_news_reader
+from GreyMatter import notes, define_subject, tell_time, general_conversations, twitter_pull, play_music, weather, connect_proxy, open_firefox, sleep, business_news_reader, twitter_interaction
 
-def brain(name, speech_text, music_path, city_name, city_code, proxy_username, proxy_password):
+def brain(name, speech_text, music_path, city_name, city_code, proxy_username, proxy_password, consumer_key, consumer_secret, access_token, access_token_secret):
     def check_message(check):
         """
         This function checks if the items in the list (specified in argument) are present in the user's input speech.
@@ -14,6 +14,9 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
 
     if check_message(['who','are', 'you']):
         general_conversations.who_are_you()
+
+    elif check_message(['tweet']):
+        twitter_interaction.post_tweet(speech_text, consumer_key, consumer_secret, access_token, access_token_secret)
 
     elif check_message(['business', 'news']):
         business_news_reader.news_reader()

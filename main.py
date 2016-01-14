@@ -132,7 +132,7 @@ def main():
             print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
     play_music.mp3gen(music_path)
-    brain(name, speech_text, music_path, city_name, city_code, proxy_username, proxy_password)
+    brain(name, speech_text, music_path, city_name, city_code, proxy_username, proxy_password, consumer_key, consumer_secret, access_token, access_token_secret)
 
     if text_mode:
         main()
