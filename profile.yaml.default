@@ -2,6 +2,8 @@ name:
   Tanay
 music_path:
   .
+images_path:
+  .
 city_name:
   New Delhi
 city_code:
@@ -18,4 +20,9 @@ twitter:
   consumer_key:
     Something
   consumer_secret:
+    Something
+imgur:
+  client_id:
+    Something
+  client_secret:
     Something

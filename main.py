@@ -9,7 +9,7 @@ import pyaudio
 import speech_recognition as sr
 
 from brain import brain
-from GreyMatter import play_music
+from GreyMatter import play_music, imgur_handler
 from GreyMatter.SenseCells.tts import tts
 
 profile = open('profile.yaml')
@@ -19,6 +19,7 @@ profile.close()
 # Functioning Variables
 name = profile_data['name']
 music_path = profile_data['music_path']
+images_path = profile_data['images_path']
 city_name = profile_data['city_name']
 city_code = profile_data['city_code']
 proxy_username = profile_data['proxy_username']
@@ -27,6 +28,8 @@ access_token = profile_data['twitter']['access_token']
 access_token_secret = profile_data['twitter']['access_token_secret']
 consumer_key = profile_data['twitter']['consumer_key']
 consumer_secret = profile_data['twitter']['consumer_secret']
+client_id = profile_data['imgur']['client_id']
+client_secret = profile_data['imgur']['client_secret']
 
 tts('Welcome ' + name + ', systems are now ready to run. How can I help you?')
 
@@ -132,7 +135,9 @@ def main():
             print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
     play_music.mp3gen(music_path)
-    brain(name, speech_text, music_path, city_name, city_code, proxy_username, proxy_password, consumer_key, consumer_secret, access_token, access_token_secret)
+    imgur_handler.img_list_gen(images_path)
+
+    brain(name, speech_text, music_path, city_name, city_code, proxy_username, proxy_password, consumer_key, consumer_secret, access_token, access_token_secret, client_id, client_secret, images_path)
 
     if text_mode:
         main()

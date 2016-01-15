@@ -1,6 +1,6 @@
-from GreyMatter import notes, define_subject, tell_time, general_conversations, twitter_pull, play_music, weather, connect_proxy, open_firefox, sleep, business_news_reader, twitter_interaction
+from GreyMatter import notes, define_subject, tell_time, general_conversations, twitter_pull, play_music, weather, connect_proxy, open_firefox, sleep, business_news_reader, twitter_interaction, imgur_handler
 
-def brain(name, speech_text, music_path, city_name, city_code, proxy_username, proxy_password, consumer_key, consumer_secret, access_token, access_token_secret):
+def brain(name, speech_text, music_path, city_name, city_code, proxy_username, proxy_password, consumer_key, consumer_secret, access_token, access_token_secret, client_id, client_secret, images_path):
     def check_message(check):
         """
         This function checks if the items in the list (specified in argument) are present in the user's input speech.
@@ -68,6 +68,9 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
 
     elif check_message(['time']):
         tell_time.what_is_time()
+
+    elif check_message(['upload']):
+        imgur_handler.image_uploader(speech_text, client_id, client_secret, images_path)
 
     elif check_message(['sleep']):
         sleep.go_to_sleep()
