@@ -63,6 +63,16 @@ Play specific music file:
 play song's file name
 ```
 
+Upload an image to imgur:
+```
+upload imagename
+```
+
+Post a tweet on twitter:
+```
+tweet some text here
+```
+
 Get weather updates:
 ```
 how is weather?
