@@ -68,6 +68,12 @@ Upload an image to imgur:
 upload imagename
 ```
 
+Get uploaded image's URLs:
+```
+show all uploads
+show all images
+```
+
 Post a tweet on twitter:
 ```
 tweet some text here
