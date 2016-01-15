@@ -72,6 +72,9 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
     elif check_message(['upload']):
         imgur_handler.image_uploader(speech_text, client_id, client_secret, images_path)
 
+    elif check_message(['all', 'uploads']) or check_message(['all', 'images']) or check_message(['uploads']):
+        imgur_handler.show_all_uploads()
+
     elif check_message(['sleep']):
         sleep.go_to_sleep()
 

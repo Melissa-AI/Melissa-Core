@@ -1,4 +1,6 @@
 import os
+import sqlite3
+from datetime import datetime
 
 from imgurpython import ImgurClient
 
@@ -26,5 +28,23 @@ def image_uploader(speech_text, client_id, client_secret, images_path):
     for i in range(0, len(image_listing)):
         if cleaned_message in image_listing[i]:
             result = client.upload_from_path(image_listing[i], config=None, anon=True)
+
+            conn = sqlite3.connect('memory.db')
+            conn.execute("INSERT INTO image_uploads (filename, url, upload_date) VALUES (?, ?, ?)", (image_listing[i], result['link'], datetime.strftime(datetime.now(), '%d-%m-%Y')))
+            conn.commit()
+            conn.close()
+
             print result['link']
             tts('Your image has been uploaded')
+
+def show_all_uploads():
+    conn = sqlite3.connect('memory.db')
+
+    cursor = conn.execute("SELECT * FROM image_uploads")
+
+    for row in cursor:
+        print(row[0] + ': (' + row[1] + ') on ' + row[2])
+
+    tts('Requested data has been printed on your terminal')
+
+    conn.close()
