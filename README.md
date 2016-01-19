@@ -13,7 +13,7 @@ You will need to install [PortAudio](http://www.portaudio.com/download.html) and
 
 ```
 git clone https://github.com/Melissa-AI/Melissa-Core.git
-cd Melissa
+cd Melissa-Core
 pip install -r requirements.txt --allow-external pywapi --allow-unverified pywapi
 cp profile.yaml.default profile.yaml
 cp memory.db.default memory.db
