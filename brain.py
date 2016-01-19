@@ -45,9 +45,6 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
     elif check_message(['how', 'are', 'you']):
         general_conversations.how_are_you()
 
-    elif check_message(['my', 'tweets']):
-        twitter_pull.my_tweets()
-
     elif check_message(['party', 'time']) or check_message(['party', 'mix']):
         play_music.play_shuffle(music_path)
 
