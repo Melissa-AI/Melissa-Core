@@ -1,4 +1,4 @@
-from GreyMatter import notes, define_subject, tell_time, general_conversations, twitter_pull, play_music, weather, connect_proxy, open_firefox, sleep, business_news_reader, twitter_interaction, imgur_handler
+from GreyMatter import notes, define_subject, tell_time, general_conversations, play_music, weather, connect_proxy, open_firefox, sleep, business_news_reader, twitter_interaction, imgur_handler
 
 def brain(name, speech_text, music_path, city_name, city_code, proxy_username, proxy_password, consumer_key, consumer_secret, access_token, access_token_secret, client_id, client_secret, images_path):
     def check_message(check):
