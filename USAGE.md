@@ -14,6 +14,15 @@ Take notes for later use:
 note some text here 
 ```
 
+Play with lights:
+```
+its very dark
+feeling angry
+feeling creative
+feeling lazy
+lights off
+```
+
 Retrieve the saved notes:
 ```
 show all notes

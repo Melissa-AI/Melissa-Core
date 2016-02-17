@@ -19,6 +19,8 @@ cp profile.yaml.default profile.yaml
 cp memory.db.default memory.db
 ```
 
+If you have blink(1), you will have to install its commandline tool by following the instructions on [this](http://blink1.thingm.com/blink1-tool/) page.
+
 #### For Linux Systems
 Install `git` and `espeak` using your distribution's package manager or build them from their binary files. Follow the same steps as OS X's installation system, starting from installing PortAudio and PyAudio. To play music, you will have to install [mpg123](http://www.mpg123.de).
 

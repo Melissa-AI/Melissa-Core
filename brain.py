@@ -1,4 +1,4 @@
-from GreyMatter import notes, define_subject, tell_time, general_conversations, play_music, weather, connect_proxy, open_firefox, sleep, business_news_reader, twitter_interaction, imgur_handler
+from GreyMatter import notes, define_subject, tell_time, general_conversations, play_music, weather, connect_proxy, open_firefox, sleep, business_news_reader, twitter_interaction, imgur_handler, lighting
 
 def brain(name, speech_text, music_path, city_name, city_code, proxy_username, proxy_password, consumer_key, consumer_secret, access_token, access_token_secret, client_id, client_secret, images_path):
     def check_message(check):
@@ -71,6 +71,21 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
 
     elif check_message(['all', 'uploads']) or check_message(['all', 'images']) or check_message(['uploads']):
         imgur_handler.show_all_uploads()
+
+    elif check_message(['feeling', 'angry']):
+        lighting.feeling_angry()
+
+    elif check_message(['feeling', 'creative']):
+        lighting.feeling_creative()
+
+    elif check_message(['feeling', 'lazy']):
+        lighting.feeling_lazy()
+
+    elif check_message(['dark']):
+        lighting.very_dark()
+
+    elif check_message(['lights', 'off']):
+        lighting.turn_off()
 
     elif check_message(['sleep']):
         sleep.go_to_sleep()
