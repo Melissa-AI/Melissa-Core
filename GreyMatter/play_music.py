@@ -22,7 +22,7 @@ def music_player(file_name):
     if sys.platform == 'darwin':
         player = "afplay '" + file_name + "'"
         return os.system(player)
-    elif sys.platform == 'linux2' or sys.platform == 'linux':
+    elif sys.platform == 'linux2' or sys.platform == 'linux' or sys.platform == 'win32':
         player = "mpg123 '" + file_name + "'"
         return os.system(player)
 

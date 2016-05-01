@@ -1,5 +1,5 @@
 ## Melissa
-Melissa is a <del>virtual</del> assistant for OS X and Linux systems. She currently uses either Google's speech-to-text engine or CMU's Sphinx, OS X's `say` command or Linux's `espeak` command along with some magical scripting which makes her alive, developed by [Tanay Pant](http://tanaypant.com) and a group of sorcerers.
+Melissa is a <del>virtual</del> assistant for OS X, Windows and Linux systems. She currently uses either Google's speech-to-text engine or CMU's Sphinx, OS X's `say` command or Linux's `espeak` command along with some magical scripting which makes her alive, developed by [Tanay Pant](http://tanaypant.com) and a group of sorcerers.
 
 ### Installation
 #### For OS X Systems
@@ -25,6 +25,9 @@ If you have blink(1), you will have to install its commandline tool by following
 
 #### For Linux Systems
 Install `git` and `espeak` using your distribution's package manager or build them from their binary files. Follow the same steps as OS X's installation system, starting from installing PortAudio and PyAudio. To play music, you will have to install [mpg123](http://www.mpg123.de).
+
+#### For Windows
+Follow the same installation steps as Linux, but take care to add the appropriate environment variables to the path. Melissa may prove to be more troublesome to install for Windows users.
 
 ### Configuration
 Once you have successfully set up your development environment, open `profile.yaml` to customise the file and add details about yourself.
