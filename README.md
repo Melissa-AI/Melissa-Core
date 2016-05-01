@@ -1,5 +1,5 @@
 ## Melissa
-Melissa is a <del>virtual</del> assistant for OS X and Linux systems. She currently uses Google speech-to-text engine, OS X's `say` command or Linux's `espeak` command along with some magical scripting which makes her alive, developed by [Tanay Pant](http://tanaypant.com) and a group of sorcerers.
+Melissa is a <del>virtual</del> assistant for OS X and Linux systems. She currently uses either Google's speech-to-text engine or CMU's Sphinx, OS X's `say` command or Linux's `espeak` command along with some magical scripting which makes her alive, developed by [Tanay Pant](http://tanaypant.com) and a group of sorcerers.
 
 ### Installation
 #### For OS X Systems
@@ -18,6 +18,8 @@ pip install -r requirements.txt --allow-external pywapi --allow-unverified pywap
 cp profile.yaml.default profile.yaml
 cp memory.db.default memory.db
 ```
+
+Melissa is currently configured to use Google STT by default in the `profile.yml` file. To use the offline CMU Sphinx STT, open the `profile.yml` file to insert `sphinx` instead of `google`. You will also have to install the Sphinx Base and Pocket Sphinx as well as add the appropriate language models by following the instructions given [here](https://wolfpaulus.com/journal/embedded/raspberrypi2-sr/).
 
 If you have blink(1), you will have to install its commandline tool by following the instructions on [this](http://blink1.thingm.com/blink1-tool/) page.
 

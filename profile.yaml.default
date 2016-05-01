@@ -1,5 +1,16 @@
 name:
   Tanay
+stt:
+  google
+pocketsphinx:
+  modeldir:
+    /usr/local/share/pocketsphinx/model/
+  hmm:
+    en-us/en-us
+  lm:
+    lm/2854.lm
+  dic:
+    lm/2854.dic
 music_path:
   .
 images_path:
