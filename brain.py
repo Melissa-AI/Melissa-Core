@@ -1,6 +1,19 @@
-from GreyMatter import notes, define_subject, tell_time, general_conversations, play_music, weather, connect_proxy, open_firefox, sleep, business_news_reader, twitter_interaction, imgur_handler, lighting
+from GreyMatter import \
+  business_news_reader, \
+  connect_proxy, \
+  define_subject, \
+  general_conversations, \
+  imgur_handler, \
+  lighting, \
+  notes, \
+  open_firefox, \
+  sleep, \
+  tell_time, \
+  twitter_interaction, \
+  play_music, \
+  weather
 
-def brain(name, speech_text, music_path, city_name, city_code, proxy_username, proxy_password, consumer_key, consumer_secret, access_token, access_token_secret, client_id, client_secret, images_path):
+def brain(profile_data, speech_text):
     def check_message(check):
         """
         This function checks if the items in the list (specified in argument) are present in the user's input speech.
@@ -16,15 +29,23 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
         general_conversations.who_are_you()
 
     elif check_message(['tweet']):
-        twitter_interaction.post_tweet(speech_text, consumer_key, consumer_secret, access_token, access_token_secret)
+        twitter_interaction.post_tweet(
+            speech_text,
+            profile_data['twitter']['consumer_key'],
+            profile_data['twitter']['consumer_secret'],
+            profile_data['twitter']['access_token'],
+            profile_data['twitter']['access_token_secret'])
 
     elif check_message(['business', 'news']):
         business_news_reader.news_reader()
 
-    elif check_message(['how', 'i', 'look']) or check_message(['how', 'am', 'i']):
+    elif check_message(['how', 'i', 'look']) \
+      or check_message(['how', 'am', 'i']):
         general_conversations.how_am_i()
 
-    elif check_message(['all', 'note']) or check_message(['all', 'notes']) or check_message(['notes']):
+    elif check_message(['all', 'note']) \
+      or check_message(['all', 'notes']) \
+      or check_message(['notes']):
         notes.show_all_notes()
 
     elif check_message(['note']):
@@ -37,7 +58,7 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
         general_conversations.tell_joke()
 
     elif check_message(['who', 'am', 'i']):
-        general_conversations.who_am_i(name)
+        general_conversations.who_am_i(profile_data['name'])
 
     elif check_message(['where', 'born']):
         general_conversations.where_born()
@@ -45,20 +66,29 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
     elif check_message(['how', 'are', 'you']):
         general_conversations.how_are_you()
 
-    elif check_message(['party', 'time']) or check_message(['party', 'mix']):
-        play_music.play_shuffle(music_path)
+    elif check_message(['party', 'time']) \
+      or check_message(['party', 'mix']):
+        play_music.play_shuffle(profile_data['music_path'])
 
-    elif check_message(['play', 'music']) or check_message(['music']):
-        play_music.play_random(music_path)
+    elif check_message(['play', 'music']) \
+      or check_message(['music']):
+        play_music.play_random(profile_data['music_path'])
 
     elif check_message(['play']):
-        play_music.play_specific_music(speech_text, music_path)
+        play_music.play_specific_music(
+            speech_text,
+            profile_data['music_path'])
 
-    elif check_message(['how', 'weather']) or check_message(['hows', 'weather']):
-        weather.weather(city_name, city_code)
+    elif check_message(['how', 'weather']) \
+      or check_message(['hows', 'weather']):
+        weather.weather(
+            profile_data['city_name'],
+            profile_data['city_code'])
 
     elif check_message(['connect', 'proxy']):
-        connect_proxy.connect_to_proxy(proxy_username, proxy_password)
+        connect_proxy.connect_to_proxy(
+            profile_data['proxy_username'],
+            profile_data['proxy_password'])
 
     elif check_message(['open', 'firefox']):
         open_firefox.open_firefox()
@@ -67,9 +97,15 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
         tell_time.what_is_time()
 
     elif check_message(['upload']):
-        imgur_handler.image_uploader(speech_text, client_id, client_secret, images_path)
+        imgur_handler.image_uploader(
+            speech_text,
+            profile_data['imgur']['client_id'],
+            profile_data['imgur']['client_secret'],
+            profile_data['images_path'])
 
-    elif check_message(['all', 'uploads']) or check_message(['all', 'images']) or check_message(['uploads']):
+    elif check_message(['all', 'uploads']) \
+      or check_message(['all', 'images']) \
+      or check_message(['uploads']):
         imgur_handler.show_all_uploads()
 
     elif check_message(['feeling', 'angry']):
@@ -92,3 +128,4 @@ def brain(name, speech_text, music_path, city_name, city_code, proxy_username, p
 
     else:
         general_conversations.undefined()
+
