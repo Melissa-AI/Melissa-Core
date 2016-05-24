@@ -4,7 +4,6 @@ oauthlib==1.0.3
 pyaml==15.8.2
 PocketSphinx==0.8
 PyAudio==0.2.9
-pywapi==0.3.8
 PyYAML==3.11
 requests==2.8.1
 requests-oauthlib==0.5.0
