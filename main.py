@@ -1,3 +1,4 @@
+import os
 import wave
 import yaml
 import speech_recognition as sr
