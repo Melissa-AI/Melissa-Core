@@ -1,4 +1,6 @@
 ## Melissa
+[![Join the chat at https://gitter.im/Melissa-AI/Melissa-Core](https://badges.gitter.im/Melissa-AI/Melissa-Core.svg)](https://gitter.im/Melissa-AI/Melissa-Core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Melissa is a <del>virtual</del> assistant for OS X, Windows and Linux systems. She currently uses either Google's speech-to-text engine or CMU's Sphinx, OS X's `say` command or Linux's `espeak` command along with some magical scripting which makes her alive, developed by [Tanay Pant](http://tanaypant.com) and a group of sorcerers.
 
 ### Installation
