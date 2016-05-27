@@ -2,3 +2,5 @@ profile.yaml
 memory.db
 *.pyc
 recording.wav
+portaudio/
+pywapi-0.3.8/
