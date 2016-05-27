@@ -11,7 +11,15 @@ Clone the project using `git`. You can install git and other CLI developer tools
 xcode-select --install
 ```
 
-You will need to install [PortAudio](http://www.portaudio.com/download.html), [PyAudio](http://people.csail.mit.edu/hubert/pyaudio/) and [Python Weather API](https://code.google.com/archive/p/python-weather-api/). Now run the following commands:
+You can install Melissa with the help of our installation script by running the following commands (works for Linux as well):
+
+```
+curl -O https://raw.githubusercontent.com/Melissa-AI/Melissa-Core/master/utilities/install-core.sh
+chmod +x install-core.sh
+./install-core.sh
+```
+
+For manual installation, you will need to install [PortAudio](http://www.portaudio.com/download.html), [PyAudio](http://people.csail.mit.edu/hubert/pyaudio/) and [Python Weather API](https://code.google.com/archive/p/python-weather-api/). Now run the following commands:
 
 ```
 git clone https://github.com/Melissa-AI/Melissa-Core.git
