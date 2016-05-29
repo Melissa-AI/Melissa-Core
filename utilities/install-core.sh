@@ -1,7 +1,7 @@
 git clone https://github.com/Melissa-AI/Melissa-Core.git
 cd Melissa-Core
 sudo apt-get update
-sudo apt-get install libasound-dev mpg123 espeak
+sudo apt-get install libasound-dev mpg123 espeak swig
 wget http://www.portaudio.com/archives/pa_stable_v19_20140130.tgz
 tar xzvf pa_stable_v19_20140130.tgz
 cd portaudio
