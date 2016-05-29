@@ -1,5 +1,3 @@
-cp profile.yaml.default profile.yaml
-cp memory.db.default memory.db
 sudo apt-get update
 sudo apt-get install libasound-dev mpg123 espeak swig
 wget http://www.portaudio.com/archives/pa_stable_v19_20140130.tgz
