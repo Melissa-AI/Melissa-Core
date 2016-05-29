@@ -10,4 +10,6 @@ def tts(message):
         return subprocess.call([tts_engine, message])
     elif sys.platform == 'linux2' or sys.platform == 'linux' or sys.platform == 'win32':
         tts_engine = 'espeak'
-        return subprocess.call([tts_engine, message])
+        language = '-ven+f4'
+        speed = '-s170'
+        return subprocess.call([tts_engine, language, speed, message])
