@@ -13,9 +13,13 @@ from brain import brain
 from GreyMatter.SenseCells.tts import tts
 
 def main():
-    profile = open('profile.yaml')
-    profile_data = yaml.safe_load(profile)
-    profile.close()
+    if os.path.isfile('profile.yaml'):
+        profile = open('profile.yaml')
+        profile_data = yaml.safe_load(profile)
+        profile.close()
+    else:
+        print('profile.yaml not found')
+        exit()
 
     r = sr.Recognizer()
 
