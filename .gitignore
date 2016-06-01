@@ -1,4 +1,4 @@
-profile.yaml
+profile.json
 memory.db
 *.pyc
 recording.wav

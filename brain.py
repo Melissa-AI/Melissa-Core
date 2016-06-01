@@ -1,12 +1,10 @@
 from GreyMatter import \
   business_news_reader, \
-  connect_proxy, \
   define_subject, \
   general_conversations, \
   imgur_handler, \
   lighting, \
   notes, \
-  open_firefox, \
   sleep, \
   tell_time, \
   twitter_interaction, \
@@ -84,14 +82,6 @@ def brain(profile_data, speech_text):
         weather.weather(
             profile_data['city_name'],
             profile_data['city_code'])
-
-    elif check_message(['connect', 'proxy']):
-        connect_proxy.connect_to_proxy(
-            profile_data['proxy_username'],
-            profile_data['proxy_password'])
-
-    elif check_message(['open', 'firefox']):
-        open_firefox.open_firefox()
 
     elif check_message(['time']):
         tell_time.what_is_time()
