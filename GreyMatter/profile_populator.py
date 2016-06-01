@@ -8,15 +8,19 @@ def profile_populator():
             return True
 
     print('Welcome to Melissa. Let us generate your profile!')
-    print(' Press Enter for using default values.')
+    print('Press Enter for using default values.')
 
     name = raw_input('Your name: ')
     if empty(name):
         name = 'Tanay'
 
-    stt = raw_input('STT Engine (google/sphinx): ')
-    if empty(stt):
-        stt = 'google'
+    while(True):
+        stt = raw_input('STT Engine (google/sphinx): ')
+        if stt in ('google', 'sphinx', ''):
+            if empty(stt):
+                stt = 'google'
+            break
+        print('Invalid input, please enter google, sphinx or <ENTER>.')
 
     music_path = raw_input('Path to your music directory: ')
     if empty(music_path):
