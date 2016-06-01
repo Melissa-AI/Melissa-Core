@@ -12,6 +12,7 @@ def main():
         profile.close()
     else:
         profile_populator()
+        main()
 
     tts('Welcome ' + profile_data['name'] + ', systems are now ready to run. How can I help you?')
     stt(profile_data)
