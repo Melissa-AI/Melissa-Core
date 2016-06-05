@@ -24,7 +24,7 @@ def brain(profile_data, speech_text):
             return False
 
     if check_message(['who','are', 'you']):
-        general_conversations.who_are_you()
+        general_conversations.who_are_you(profile_data)
 
     elif check_message(['tweet']):
         twitter_interaction.post_tweet(
@@ -56,7 +56,7 @@ def brain(profile_data, speech_text):
         general_conversations.tell_joke()
 
     elif check_message(['who', 'am', 'i']):
-        general_conversations.who_am_i(profile_data['name'])
+        general_conversations.who_am_i(profile_data)
 
     elif check_message(['where', 'born']):
         general_conversations.where_born()

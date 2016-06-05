@@ -10,6 +10,18 @@ def profile_populator():
     print('Welcome to Melissa. Let us generate your profile!')
     print('Press Enter for using default values.')
 
+    va_name = raw_input('What you like to name me?: ')
+    if empty(va_name):
+        va_name = 'Melissa'
+
+    while(True):
+        va_gender = raw_input('What is my gender?: ')
+        if va_gender in ('male', 'female', ''):
+            if empty(va_gender):
+                va_gender = 'female'
+            break
+        print('Invalid input, please enter male, female or <ENTER>.')
+
     name = raw_input('Your name: ')
     if empty(name):
         name = 'Tanay'
@@ -51,7 +63,7 @@ def profile_populator():
     lm = 'lm/2854.lm'
     dic = 'lm/2854.dic'
 
-    profile_data = {'name': name, 'stt': stt, 'music_path': music_path, 'images_path': images_path, 'city_name': city_name, 'city_code': city_code, 'pocketsphinx': {'modeldir': modeldir, 'hmm': hmm, 'lm': lm, 'dic': dic}, 'twitter': {'access_token': access_token, 'access_token_secret': access_token_secret, 'consumer_key': consumer_key, 'consumer_secret': consumer_secret}, 'imgur': {'client_id': client_id, 'client_secret': client_secret}}
+    profile_data = {'va_name': va_name, 'va_gender': va_gender, 'name': name, 'stt': stt, 'music_path': music_path, 'images_path': images_path, 'city_name': city_name, 'city_code': city_code, 'pocketsphinx': {'modeldir': modeldir, 'hmm': hmm, 'lm': lm, 'dic': dic}, 'twitter': {'access_token': access_token, 'access_token_secret': access_token_secret, 'consumer_key': consumer_key, 'consumer_secret': consumer_secret}, 'imgur': {'client_id': client_id, 'client_secret': client_secret}}
 
     with open('profile.json', 'w') as outfile:
         json.dump(profile_data, outfile, indent=4)

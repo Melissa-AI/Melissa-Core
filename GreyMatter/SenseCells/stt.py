@@ -10,6 +10,7 @@ except:
 from brain import brain
 
 def stt(profile_data):
+    va_name = profile_data['va_name']
     r = sr.Recognizer()
     if profile_data['stt'] == 'google':
         while True:
@@ -20,9 +21,9 @@ def stt(profile_data):
 
             try:
                 speech_text = r.recognize_google(audio).lower().replace("'", "")
-                print("Melissa thinks you said '" + speech_text + "'")
+                print(va_name + " thinks you said '" + speech_text + "'")
             except sr.UnknownValueError:
-                print("Melissa could not understand audio")
+                print(va_name + " could not understand audio")
             except sr.RequestError as e:
                 print("Could not request results from Google Speech Recognition service; {0}".format(e))
             else:
@@ -52,7 +53,7 @@ def stt(profile_data):
             decoder.end_utt()
 
             speech_text = decoder.hyp().hypstr
-            print("Melissa thinks you said '" + speech_text + "'")
+            print(va_name + " thinks you said '" + speech_text + "'")
             return speech_text.lower().replace("'", "")
 
         while True:
