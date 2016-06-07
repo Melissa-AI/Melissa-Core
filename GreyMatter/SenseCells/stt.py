@@ -26,6 +26,9 @@ def stt(profile_data):
                 print(va_name + " could not understand audio")
             except sr.RequestError as e:
                 print("Could not request results from Google Speech Recognition service; {0}".format(e))
+            except AttributeError:
+                print('You are not connected to the internet, please enter "sphinx" in the "stt" field of your "profile.json" file to work offline.')
+                exit()
             else:
                 brain(profile_data, speech_text)
 
