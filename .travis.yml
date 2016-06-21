@@ -3,7 +3,7 @@ python:
   - "2.7"
 sudo: true
 install: 
-  - "curl -O https://raw.githubusercontent.com/Melissa-AI/Melissa-Core/master/utilities/travis-build-core.sh && chmod +x travis-build-core.sh && ./travis-build-core.sh"
+  - "curl -O https://raw.githubusercontent.com/Melissa-AI/Melissa-Core/master/setup/travis-build-core.sh && chmod +x travis-build-core.sh && ./travis-build-core.sh"
   - "cp memory.db.default memory.db"
 script: 
   - "python tests/check_profile.py"
