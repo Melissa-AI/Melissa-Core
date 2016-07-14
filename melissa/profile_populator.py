@@ -4,9 +4,6 @@ import subprocess
 import json
 from getpass import getpass
 
-# Melissa
-from tts import tts
-
 def tts_local(message):
     if sys.platform == 'darwin':
         tts_engine = 'say'
@@ -119,7 +116,7 @@ def profile_populator():
 
     profile_data = {
         'va_name': va_name,
-        'va_gender': va_gender, 
+        'va_gender': va_gender,
         'name': name,
         'stt': stt,
         'music_path': music_path,

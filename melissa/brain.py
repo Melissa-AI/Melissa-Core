@@ -1,12 +1,6 @@
-import importlib
-import pkgutil
-import sqlite3
-import sys
-import os
 from collections import namedtuple
 
 # Melissa
-import profile
 import actions_db
 
 order_match_factor = 1.5
@@ -81,7 +75,7 @@ def query(text):
             scoring_row = scoring[sql_row.word_group]
             scoring_row['matched'] += 1
 
-            # And if the row word matches the next group word in 
+            # And if the row word matches the next group word in
             # order, add 1 to order.
             if sql_row.word ==\
                 scoring_row['group'][scoring_row['order']]:
@@ -92,7 +86,7 @@ def query(text):
     top_scores = []
     for word_group, fields in scoring.iteritems():
         # A word_group can only enter scoring when all the words
-        # in the group were matched. 
+        # in the group were matched.
         if fields['matched'] == fields['count']:
             score = fields['count'] # Default score
 
@@ -105,7 +99,7 @@ def query(text):
             # the current best score, prepend it to the top_scores
             # list.
             if len(top_scores) == 0 or score >= top_scores[0]['score']:
-                top_scores.insert(0,{'word_group':word_group, 'score':score, 
+                top_scores.insert(0,{'word_group':word_group, 'score':score,
                                      'function':fields['function']})
             # else bypass
 

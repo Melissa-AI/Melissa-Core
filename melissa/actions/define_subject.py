@@ -15,8 +15,8 @@ def define_subject(speech_text):
         msg = 'define requires subject words'
         print msg
         tts(msg)
-        return;
-  
+        return
+
     try:
         wiki_data = wikipedia.summary(cleaned_message, sentences=5)
 

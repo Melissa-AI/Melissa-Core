@@ -47,7 +47,7 @@ def create_actions_db(con, cur):
             );
             """)
         con.commit()
-        
+
     except sqlite3.Error, err:
         print "Error %s:" % err.args[0]
         sys.exit(1)
@@ -157,7 +157,7 @@ def assemble_actions_db():
         con.text_factory = sqlite3.OptimizedUnicode
         cur = con.cursor()
 
-    except sqlite3.Error, e:        
+    except sqlite3.Error, e:
         print "Error %s:" % e.args[0]
         sys.exit(1)
 
@@ -167,7 +167,7 @@ def assemble_actions_db():
     package = importlib.import_module(profile.data['modules'])
     for finder, name, ispkg in pkgutil.walk_packages(package.__path__):
         print 'Loading module '+name
-        try: 
+        try:
             loader = finder.find_module(name)
             mod = loader.load_module(name)
 

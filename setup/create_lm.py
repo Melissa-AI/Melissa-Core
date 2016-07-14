@@ -2,13 +2,11 @@
 # python -m create_lm
 
 import os
-import sqlite3
 import urllib2
 import urllib
 from bs4 import BeautifulSoup
 
 # Melissa
-import melissa.profile
 import melissa.actions_db as actions_db
 
 # Poster
@@ -37,7 +35,6 @@ def get_language_model():
 
     # Get the base name and its numeric part.
     base = os.path.basename(anchors[0]['href'])
-    new_base = base[:base.rfind("."):]
     num_part = os.path.splitext(base)[0][3:]
 
     # Get the url less the base name.
