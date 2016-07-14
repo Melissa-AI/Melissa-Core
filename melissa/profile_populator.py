@@ -109,7 +109,7 @@ def profile_populator():
     client_secret = 'xxxx'
 
     modeldir = './data/model/'
-    hmm = 'hmm/en_US/hub4wsj_sc_8k'
+    hmm = 'hmm/en_us/hub4wsj_sc_8k'
     lm = 'lm/sphinx.lm'
     dic = 'lm/sphinx.dic'
 
