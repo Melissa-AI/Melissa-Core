@@ -25,10 +25,9 @@ def stt():
     if profile.data['stt'] == 'google':
         while True:
             with sr.Microphone() as source:
-                r.adjust_for_ambient_noise(source)
                 print("Say something!")
                 audio = r.listen(source)
-                print("after listen")
+
             try:
                 speech_text = r.recognize_google(audio).lower().replace("'", "")
                 print(va_name + " thinks you said '" + speech_text + "'")
@@ -62,13 +61,17 @@ def stt():
             decoder.process_raw(data, False, True)
             decoder.end_utt()
 
-            speech_text = decoder.hyp().hypstr
-            print(va_name + " thinks you said '" + speech_text + "'")
-            return speech_text.lower().replace("'", "")
+            hyp = decoder.hyp()
+            if hasattr(hyp, 'hypstr'):
+                speech_text = hyp.hypstr
+                print(profile.data['va_name'] + " thinks you said '"
+                      + speech_text + "'")
+                return speech_text.lower().replace("'", "")
+            else:
+                return ''
 
         while True:
             with sr.Microphone() as source:
-                r.adjust_for_ambient_noise(source)
                 print("Say something!")
                 audio = r.listen(source)
 

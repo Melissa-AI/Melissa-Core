@@ -1,0 +1,73 @@
+### Designing the WORDS constant for modules
+
+#### Melissa and Jasper format examples
+This module code illustrates the Melissa WORDS format.
+<pre>
+WORDS = {'play_shuffle': {'priority': 1, 'groups': [['party', 'time'], ['party', 'mix']]},
+         'play_random': {'groups': [['play', 'music'], 'music']},
+         'play_specific_music': {'groups': ['play']}
+        }
+</pre>
+
+This module code illustrates the Jasper WORDS format.
+<pre>
+WORDS = ["WEATHER", "TODAY", "TOMORROW"]
+PRIORITY = 4
+</pre>
+
+#### The Melissa WORDS format and Brain matching procedure
+The following description of how a module's WORDS constant is processed can seem technical, but the basic ideas are:
+
+* A group of words is better than a single word,
+* More words in a group are better than less, 
+* User expression words matched in order against a group of words is better,
+* User expression words matched in any order against a group of words is not as good as the prior point but still worthwhile,
+* All words in a group must be matched for the group to count,
+* For words not in a group, the more matched in any order the better (this only occurs when no word-groups are matched),
+* A priority to decide scoring ties is used as a last resort.
+
+The first dictionary key in the Melissa format is the _function name_ in the module that will be associated with its word-groups, single words, and priority, and used to choose that function by brain.py. The _function name_ key will have a value that is a dictionary of two keys _'priority'_ and _'groups'_.  _'groups'_ is required and _'priority'_ is optional. When _'priority'_ is omitted it is set to ``0`` that gives it the best priority for being selected when match-scoring between two or more module functions obtains the same value. Higher priority values reduce a function's priority.
+
+_'groups'_ has a list value that may be a list of words (single words) and/or lists of words (word-groups). _'play_shuffle'_ has two word-groups in its _'groups'_ list. _'play_random'_ has a word and a word-group. _'play_specific_music'_ has a single word.
+
+Word-groups obtain the highest score when matching words to functions in two ways. The best match occurs when the user expression contains all the words of a word-group in the same order as in the word-group. The expression may contain words between the words matched against the word-group without changing the score for the word-group.
+
+A second, lower match level, occurs when all the words in a word-group are matched out of order.
+
+A word-group for which one or more words are not matched is not included in scoring.
+
+Longer matched word-groups obtain a higher score than shorter matched word-groups.
+
+When two word-groups obtain the same highest score, the priorities (_'priority'_) for those functions associated with the high-scoring word-groups are checked and the lowest priority (lower is better) function is selected. If two or more functions having the same highest score have the same priority then the first one returned on the SQLite query to check priority is selected. This is an undesirable scoring collision and effort should be made to avoid this occurrence by improving the word-groups for the colliding functions.
+
+When a user expression does not match any word-group, the single words in the _'groups'_ list are matched and the function that obtains the highest number of single word matches in any order is selected. If two or more functions obtain the same number of single word matches their priorities are checked and the function with the lowest priority is selected. For collisions, the first function returned by the SQLite priority query is selected.
+
+The procedure seems complex but obtains a result very close if not exactly the same as the current Melissa code. (No priority values are currently used in the reformatted Melissa modules.) The difference is that all modules are scored in parallel and the one with the highest score is selected. The WORDS constant is easy to modify allowing a developer to quickly provide any number of word-groups and single words to help a module's function become differentiated from another. A future collision checking procedure is planned.
+
+The use of a scoring method to choose a classification is standard in AI.
+
+#### The Jasper WORDS format and Brain matching procedure
+
+The words in Jasper's WORDS list are treated as single words in the Melissa procedure above and corresponds to Jasper's matching procedure.
+
+Jasper uses a single module function, _handle_, when the words for a module are matched.
+
+#### Notes
+
+Converting Jasper modules to Melissa will require modifications for _mic_ and _profile_. (See twitter_interaction.py for an example of how to use _tts_ and the new _profile_ methods in the current Melissa.) It will likely be useful to change Jasper's WORDS list to the Melissa format to provide better matching ability.
+
+All functions in either the Melissa or Jasper format must have a single string parameter even though that parameter may not be used by the function. That parameter is commonly the user expression.
+
+The words in the ``groups`` list are converted to lower case when they are loaded.
+
+The SQLite DB is a memory DB created each time Melissa starts by reading all the modules. New modules and module changes take effect when Melissa is started or restarted. A disk SQLite3 DB can be used when debugging the module data used in brain.py by changing the following line in profile_populator.py
+
+``words_db_file = ':memory:'``
+
+to, for example
+
+``words_db_file = 'words.sqlite'``
+
+and deleting the profile.json file that will then be recreated when Melissa starts. Or the profile.json line can be changed directly, realizing that when profile_populator.py is run again, that change is lost.
+
+SQLite Manager, a FireFox add-on providing an easy way to view disk-based SQLite3 DBs.

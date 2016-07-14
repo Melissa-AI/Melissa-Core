@@ -90,7 +90,7 @@ def query(text):
     # Score the word_groups according to the assembled match
     # results.
     top_scores = []
-    for key, fields in scoring.iteritems():
+    for word_group, fields in scoring.iteritems():
         # A word_group can only enter scoring when all the words
         # in the group were matched. 
         if fields['matched'] == fields['count']:
@@ -104,8 +104,8 @@ def query(text):
             # If this word_group score is greater-than or equal-to
             # the current best score, prepend it to the top_scores
             # list.
-            if len(top_scores) == 0 or score >= top_scores[0][1]:
-                top_scores.insert(0,{'key':key, 'score':score, 
+            if len(top_scores) == 0 or score >= top_scores[0]['score']:
+                top_scores.insert(0,{'word_group':word_group, 'score':score, 
                                      'function':fields['function']})
             # else bypass
 
@@ -159,10 +159,11 @@ def query(text):
             getattr(actions_db.modules[module_name], function)(text)
 
         else:
+            print top_scores
             print "Run function '%s' \nfor word_group '%s' \nhaving score %4.2f"\
-                  % (top_scores[0][2], top_scores[0][0],
-                     top_scores[0][1])
-            module_name, function = top_scores[0][2].split()
+                  % (top_scores[0]['function'], top_scores[0]['word_group'],
+                     top_scores[0]['score'])
+            module_name, function = top_scores[0]['function'].split()
             # run function
             getattr(actions_db.modules[module_name], function)(text)
 

@@ -1,9 +1,20 @@
 import os
+import sys
+import subprocess
 import json
 from getpass import getpass
 
 # Melissa
 from tts import tts
+
+def tts_local(message):
+    if sys.platform == 'darwin':
+        tts_engine = 'say'
+        return subprocess.call([tts_engine, message])
+    elif sys.platform.startswith('linux') or sys.platform == 'win32':
+        tts_engine = 'espeak'
+        speed = '-s170'
+        return subprocess.call([tts_engine, speed, message])
 
 def profile_populator():
     def empty(variable):
@@ -12,7 +23,7 @@ def profile_populator():
         else:
             return True
 
-    # tts('Welcome to Melissa. Let us generate your profile!')
+    tts_local('Welcome to Melissa. Let us generate your profile!')
     print('Welcome to Melissa. Let us generate your profile!')
     print('Press Enter for using default values.')
 
@@ -97,10 +108,10 @@ def profile_populator():
     client_id = 'xxxx'
     client_secret = 'xxxx'
 
-    modeldir = '/usr/local/share/pocketsphinx/model/'
-    hmm = 'en-us/en-us'
-    lm = 'lm/2854.lm'
-    dic = 'lm/2854.dic'
+    modeldir = './data/model/'
+    hmm = 'hmm/en_US/hub4wsj_sc_8k'
+    lm = 'lm/sphinx.lm'
+    dic = 'lm/sphinx.dic'
 
     modules = 'melissa.actions'
     actions_db_file = ':memory:'

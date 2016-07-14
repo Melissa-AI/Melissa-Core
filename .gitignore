@@ -4,3 +4,6 @@ memory.db
 recording.wav
 portaudio/
 pywapi-0.3.8/
+*~
+data/model/hmm/en_US/
+
