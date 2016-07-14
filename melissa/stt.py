@@ -1,21 +1,30 @@
-import os
+# Change to class, check Jasper.
+# Put in test for OK import of pocketsphinx when it is being used.
+#   See Jasper method.
+# Select either Google or pocketsphinx as in Jasper
+#   without using an if statement.
 
+import os
 import speech_recognition as sr
+
 try:
     from pocketsphinx.pocketsphinx import *
     from sphinxbase.sphinxbase import *
 except:
     pass
 
-from brain import brain
+# Melissa
+import profile
+from tts import tts
+import brain
 
-def stt(profile_data):
-    va_name = profile_data['va_name']
+def stt():
+    va_name = profile.data['va_name']
     r = sr.Recognizer()
-    if profile_data['stt'] == 'google':
+    tts('Hello' + profile.data['name'] + ', systems are now ready to run. How can I help you?')
+    if profile.data['stt'] == 'google':
         while True:
             with sr.Microphone() as source:
-                r.adjust_for_ambient_noise(source)
                 print("Say something!")
                 audio = r.listen(source)
 
@@ -26,18 +35,15 @@ def stt(profile_data):
                 print(va_name + " could not understand audio")
             except sr.RequestError as e:
                 print("Could not request results from Google Speech Recognition service; {0}".format(e))
-            except AttributeError:
-                print('You are not connected to the internet, please enter "sphinx" in the "stt" field of your "profile.json" file to work offline.')
-                exit()
             else:
-                brain(profile_data, speech_text)
+                brain.query(speech_text)
 
-    elif profile_data['stt'] == 'sphinx':
+    elif profile.data['stt'] == 'sphinx':
 
-        modeldir = profile_data['pocketsphinx']['modeldir'].encode("ascii")
-        hmm = profile_data['pocketsphinx']['hmm'].encode("ascii")
-        lm = profile_data['pocketsphinx']['lm'].encode("ascii")
-        dic = profile_data['pocketsphinx']['dic'].encode("ascii")
+        modeldir = profile.data['pocketsphinx']['modeldir']
+        hmm = profile.data['pocketsphinx']['hmm']
+        lm = profile.data['pocketsphinx']['lm']
+        dic = profile.data['pocketsphinx']['dic']
 
         config = Decoder.default_config()
         config.set_string('-hmm', os.path.join(modeldir, hmm))
@@ -55,18 +61,26 @@ def stt(profile_data):
             decoder.process_raw(data, False, True)
             decoder.end_utt()
 
-            speech_text = decoder.hyp().hypstr
-            print(va_name + " thinks you said '" + speech_text + "'")
-            return speech_text.lower().replace("'", "")
+            hyp = decoder.hyp()
+            if hasattr(hyp, 'hypstr'):
+                speech_text = hyp.hypstr
+                print(profile.data['va_name'] + " thinks you said '"
+                      + speech_text + "'")
+                return speech_text.lower().replace("'", "")
+            else:
+                return ''
 
         while True:
             with sr.Microphone() as source:
-                r.adjust_for_ambient_noise(source)
                 print("Say something!")
                 audio = r.listen(source)
 
             with open("recording.wav", "wb") as f:
                 f.write(audio.get_wav_data())
 
-            brain(profile_data, sphinx_stt())
+            brain.query(sphinx_stt())
 
+    elif profile.data['stt'] == 'keyboard':
+        while True:
+            keyboard_text = raw_input('Enter your query: ')
+            brain.query(keyboard_text)

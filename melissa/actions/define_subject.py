@@ -1,14 +1,22 @@
 import re
-
 import wikipedia
 
-from SenseCells.tts import tts
+# Melissa
+from melissa.tts import tts
+
+WORDS = {'define_subject': {'groups': ['define']}
+        }
 
 def define_subject(speech_text):
     words_of_message = speech_text.split()
     words_of_message.remove('define')
-    cleaned_message = ' '.join(words_of_message)
-
+    cleaned_message = ' '.join(words_of_message).rstrip()
+    if len(cleaned_message) == 0:
+        msg = 'define requires subject words'
+        print msg
+        tts(msg)
+        return;
+  
     try:
         wiki_data = wikipedia.summary(cleaned_message, sentences=5)
 
