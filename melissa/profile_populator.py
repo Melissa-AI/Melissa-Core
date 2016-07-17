@@ -97,6 +97,11 @@ def profile_populator():
     if len(gmail_address) > 0:
         gmail_password = getpass()
 
+    icloud_username = raw_input('Enter your icloud username/address (???@???.com): ')
+    icloud_password = ''
+    if len(icloud_username) > 0:
+        icloud_password = getpass()
+
     access_token = 'xxxx'
     access_token_secret = 'xxxx'
     consumer_key = 'xxxx'
@@ -143,6 +148,10 @@ def profile_populator():
         'gmail': {
             'address': gmail_address,
             'password': gmail_password
+        },
+        'icloud': {
+            'username': icloud_username,
+            'password': icloud_password
         },
         'modules': modules,
         'actions_db_file': actions_db_file,

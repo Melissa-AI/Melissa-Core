@@ -21,7 +21,7 @@ import brain
 def stt():
     va_name = profile.data['va_name']
     r = sr.Recognizer()
-    tts('Hello' + profile.data['name'] + ', systems are now ready to run. How can I help you?')
+    tts('Welcome' + profile.data['name'] + ', systems are now ready to run. How can I help you?')
     if profile.data['stt'] == 'google':
         while True:
             with sr.Microphone() as source:

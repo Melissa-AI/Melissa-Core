@@ -1,6 +1,5 @@
 import psutil
 import platform
-import datetime
 
 # Melissa
 from melissa.tts import tts
