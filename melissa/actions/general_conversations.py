@@ -10,6 +10,7 @@ WORDS={'who_are_you': {'groups': [['who', 'are', 'you']]},
        'who_am_i': {'groups': [['who', 'am', 'i']]},
        'where_born': {'groups': [['where', 'born']]},
        'how_are_you': {'groups': [['how', 'are', 'you']]},
+       'are_you_up': {'groups': [['you', 'up']]},
        'undefined': {'groups': []},
       }
 
@@ -36,6 +37,9 @@ def where_born(text):
 
 def how_are_you(text):
     tts('I am fine, thank you.')
+
+def are_you_up(text):
+    tts('For you sir, always.')
 
 def undefined(text):
     tts('I dont know what that means!')
