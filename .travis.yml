@@ -4,6 +4,6 @@ python:
 sudo: true
 install: 
   - "curl -O https://raw.githubusercontent.com/Melissa-AI/Melissa-Core/master/setup/travis-build-core.sh && chmod +x travis-build-core.sh && ./travis-build-core.sh"
-  - "cp memory.db.default memory.db"
+  - "cp data/memory.db.default data/memory.db"
 script: 
   - "python tests/check_profile.py"

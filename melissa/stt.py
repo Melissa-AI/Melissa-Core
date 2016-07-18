@@ -82,5 +82,5 @@ def stt():
 
     elif profile.data['stt'] == 'keyboard':
         while True:
-            keyboard_text = raw_input('Enter your query: ')
+            keyboard_text = raw_input('Write something: ')
             brain.query(keyboard_text)

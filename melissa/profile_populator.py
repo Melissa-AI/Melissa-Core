@@ -117,7 +117,7 @@ def profile_populator():
 
     modules = 'melissa.actions'
     actions_db_file = ':memory:'
-    memory_db = './memory.db'
+    memory_db = './data/memory.db'
 
     profile_data = {
         'va_name': va_name,

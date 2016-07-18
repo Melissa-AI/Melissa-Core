@@ -1,5 +1,5 @@
 profile.json
-memory.db
+data/memory.db
 *.pyc
 recording.wav
 portaudio/
