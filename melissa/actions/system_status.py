@@ -1,10 +1,11 @@
+import datetime
 import psutil
 import platform
 
 # Melissa
 from melissa.tts import tts
 
-WORDS = {'system_status': {'groups': [['how', 'systems'], ['how', 'system'], 'status']}}
+WORDS = {'system_status': {'groups': [['how', 'systems'], ['how', 'system'], 'status']}, 'system_uptime': {'groups': ['uptime']}}
 
 def system_status(text):
     os, name, version, _, _, _ = platform.uname()
@@ -16,4 +17,10 @@ def system_status(text):
     response += "This system is named %s and has %s CPU cores. " %(name, cores)
     response += "Current CPU utilization is %s percent. " %cpu_percent
     response += "Current memory utilization is %s percent." %memory_percent
+    tts(response)
+
+def system_uptime(text):
+    boot_time = datetime.datetime.fromtimestamp(psutil.boot_time())
+    running_since = boot_time.strftime("%A %d. %B %Y")
+    response = 'System has been running since ' + running_since
     tts(response)
