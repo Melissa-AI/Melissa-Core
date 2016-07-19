@@ -45,16 +45,22 @@ def profile_populator():
         name = 'Tanay'
 
     while(True):
-        stt = raw_input('STT Engine ((g)oogle/(s)phinx/(k)eyboard): ').lower()
-        if stt in ('g','google', 's','sphinx', 'k','keyboard', ''):
+        stt = raw_input('STT Engine ((g)oogle/(s)phinx/(t)elegram/(k)eyboard): ').lower()
+        if stt in ('g','google', 's','sphinx', 'k','keyboard', 't', 'telegram', ''):
             if empty(stt) or stt == 'g':
                 stt = 'google'
             elif stt == 's':
                 stt = 'sphinx'
+            elif stt == 't':
+                stt = 'telegram'
+                telegram_username = raw_input('Your username at Telegram: ')
+                if empty(telegram_username):
+                    telegram_username = 'tanay1337'
+                telegram_token = raw_input('Your Telegram token: ')
             elif stt == 'k':
                 stt = 'keyboard'
             break
-        print('Invalid input, please enter (g)oogle, (s)phinx, (k)eyboard or <ENTER>.')
+        print('Invalid input, please enter (g)oogle, (s)phinx, (t)elegram, (k)eyboard or <ENTER>.')
 
     while(True):
         music_path = raw_input('Path to your music directory: ')
@@ -124,6 +130,8 @@ def profile_populator():
         'va_gender': va_gender,
         'name': name,
         'stt': stt,
+        'telegram_username': telegram_username,
+        'telegram_token': telegram_token,
         'music_path': music_path,
         'images_path': images_path,
         'city_name': city_name,

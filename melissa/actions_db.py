@@ -153,7 +153,7 @@ def assemble_actions_db():
         and os.path.exists(profile.data['actions_db_file']):
             os.remove(profile.data['actions_db_file'])
 
-        con = sqlite3.connect(profile.data['actions_db_file'])
+        con = sqlite3.connect(profile.data['actions_db_file'], check_same_thread=False)
         con.text_factory = sqlite3.OptimizedUnicode
         cur = con.cursor()
 

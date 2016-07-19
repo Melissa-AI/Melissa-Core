@@ -5,6 +5,7 @@ from melissa import profile
 from melissa.tts import tts
 
 WORDS={'who_are_you': {'groups': [['who', 'are', 'you']]},
+       'toss_coin': {'groups': [['heads', 'tails'], ['toss', 'coin'], ['flip', 'coin']]},
        'how_am_i': {'groups': [['how', 'i', 'look'],['how', 'am', 'i']]},
        'tell_joke': {'groups': [['tell', 'joke']]},
        'who_am_i': {'groups': [['who', 'am', 'i']]},
@@ -20,6 +21,10 @@ def who_are_you(text):
     va_name + ', didnt I tell you before?',
     'You ask that so many times! I am ' + va_name]
     tts(random.choice(messages))
+
+def toss_coin(text):
+    outcomes = ['heads', 'tails']
+    tts('I just flipped a coin. It shows ' + random.choice(outcomes))
 
 def how_am_i(text):
     replies =['You are goddamn handsome!', 'My knees go weak when I see you.', 'You are sexy!', 'You look like the kindest person that I have met.']

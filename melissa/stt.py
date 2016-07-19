@@ -5,8 +5,10 @@
 #   without using an if statement.
 
 import os
+import time
 import speech_recognition as sr
 
+import telepot
 try:
     from pocketsphinx.pocketsphinx import *
     from sphinxbase.sphinxbase import *
@@ -84,3 +86,23 @@ def stt():
         while True:
             keyboard_text = raw_input('Write something: ')
             brain.query(keyboard_text)
+
+    elif profile.data['stt'] == 'telegram':
+        def handle(msg):
+            username = msg['chat']['username']
+            command = msg['text'].lower().replace("'", "")
+
+            if username == profile.data['telegram_username']:
+                print(profile.data['va_name'] + " thinks you said '"
+                      + command + "'")
+                brain.query(command)
+
+        if profile.data['telegram_token'] == '':
+            tts('Please enter a Telegram token or configure a different STT in the profile.json file.')
+            quit()
+        else:
+            bot = telepot.Bot(profile.data['telegram_token'])
+            bot.notifyOnMessage(handle)
+
+            while 1:
+                time.sleep(10)
