@@ -89,6 +89,7 @@ def stt():
 
     elif profile.data['stt'] == 'telegram':
         def handle(msg):
+            chat_id = msg['chat']['id']
             username = msg['chat']['username']
             command = msg['text'].lower().replace("'", "")
 
@@ -96,8 +97,11 @@ def stt():
                 print(profile.data['va_name'] + " thinks you said '"
                       + command + "'")
                 brain.query(command)
+            else:
+                error_msg = 'You are not authorised to use this bot.'
+                bot.sendMessage(chat_id, error_msg)
 
-        if profile.data['telegram_token'] == '':
+        if profile.data['telegram_token'] == 'xxxx':
             tts('Please enter a Telegram token or configure a different STT in the profile.json file.')
             quit()
         else:

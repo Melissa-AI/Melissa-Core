@@ -53,14 +53,14 @@ def profile_populator():
                 stt = 'sphinx'
             elif stt == 't':
                 stt = 'telegram'
-                telegram_username = raw_input('Your username at Telegram: ')
-                if empty(telegram_username):
-                    telegram_username = 'tanay1337'
-                telegram_token = raw_input('Your Telegram token: ')
             elif stt == 'k':
                 stt = 'keyboard'
             break
         print('Invalid input, please enter (g)oogle, (s)phinx, (t)elegram, (k)eyboard or <ENTER>.')
+
+    telegram_username = raw_input('Your username at Telegram: ')
+    if empty(telegram_username):
+        telegram_username = 'tanay1337'
 
     while(True):
         music_path = raw_input('Path to your music directory: ')
@@ -115,6 +115,8 @@ def profile_populator():
 
     client_id = 'xxxx'
     client_secret = 'xxxx'
+
+    telegram_token = 'xxxx'
 
     modeldir = './data/model/'
     hmm = 'hmm/en_us/hub4wsj_sc_8k'
