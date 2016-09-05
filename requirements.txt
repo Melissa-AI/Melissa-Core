@@ -1,6 +1,7 @@
 beautifulsoup4==4.4.1
 HoroscopeGenerator==0.1.8
 imgurpython==1.1.6
+netifaces==0.10.5
 oauthlib==1.0.3
 PocketSphinx==0.0.9
 psutil==4.3.0
