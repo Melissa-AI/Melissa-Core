@@ -10,8 +10,8 @@ from bs4 import BeautifulSoup
 import melissa.actions_db as actions_db
 
 # Poster
-import melissa.utilities.encode as encode
-from melissa.utilities.streaminghttp import register_openers
+import poster.encode as encode
+from poster.streaminghttp import register_openers
 
 
 def get_language_model():

@@ -4,6 +4,7 @@ imgurpython==1.1.6
 netifaces==0.10.5
 oauthlib==1.0.3
 PocketSphinx==0.0.9
+poster==0.8.1
 psutil==4.3.0
 PyAudio==0.2.9
 pyicloud==0.9.1
