@@ -31,7 +31,7 @@ def how_am_i(text):
     tts(random.choice(replies))
 
 def tell_joke(text):
-    jokes = ['What happens to a frogs car when it breaks down? It gets toad away.', 'Why was six scared of seven? Because seven ate nine.', 'What is the difference between snowmen and snowwomen? Snowballs.', 'No, I always forget the punch line.']
+    jokes = ['What happens to a frogs car when it breaks down? It gets toad away.', 'Why was six scared of seven? Because seven ate nine.', 'Why are mountains so funny? Because they are hill areas.', 'Have you ever tried to eat a clock? I hear it is very time consuming.', 'What happened when the wheel was invented? A revolution.', 'What do you call a fake noodle? An impasta!', 'Did you hear about that new broom? It is sweeping the nation!', 'What is heavy forward but not backward? Ton.',  'No, I always forget the punch line.']
     tts(random.choice(jokes))
 
 def who_am_i(text):
