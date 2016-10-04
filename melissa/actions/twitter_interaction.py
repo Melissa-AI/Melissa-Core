@@ -6,16 +6,19 @@ from melissa.tts import tts
 
 WORDS = {'post_tweet': {'groups': ['tweet']}}
 
+
 def post_tweet(text):
 
     if profile.data['twitter']['consumer_key'] == "xxxx" \
-    or profile.data['twitter']['consumer_secret'] == "xxxx" \
-    or profile.data['twitter']['access_token'] == "xxxx" \
-    or profile.data['twitter']['access_token_secret'] == "xxxx":
-        msg = 'twitter requires a consumer key and secret, and an access token and token secret.'
+            or profile.data['twitter']['consumer_secret'] == "xxxx" \
+            or profile.data['twitter']['access_token'] == "xxxx" \
+            or profile.data['twitter']['access_token_secret'] == "xxxx":
+
+        msg = "twitter requires a consumer key and secret," \
+              " and an access token and token secret."
         print msg
         tts(msg)
-        return;
+        return
 
     words_of_message = text.split()
     words_of_message.remove('tweet')
@@ -33,4 +36,3 @@ def post_tweet(text):
     api.update_status(status=cleaned_message)
 
     tts('Your tweet has been posted')
-
