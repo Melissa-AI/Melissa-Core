@@ -13,6 +13,8 @@ WORDS = {'who_are_you': {'groups': [['who', 'are', 'you']]},
          'where_born': {'groups': [['where', 'born']]},
          'how_are_you': {'groups': [['how', 'are', 'you']]},
          'are_you_up': {'groups': [['you', 'up']]},
+         'love_you': {'groups': [['love', 'you']]},
+         'marry_me': {'groups': [['marry', 'me']]},
          'undefined': {'groups': []}}
 
 
@@ -71,6 +73,18 @@ def how_are_you(text):
 
 def are_you_up(text):
     tts('For you sir, always.')
+
+
+def love_you(text):
+    replies = [
+               'I love you too.',
+               'You are looking for love in the wrong place.'
+              ]
+    tts(random.choice(replies))
+
+
+def marry_me(text):
+    tts('I have been receiving a lot of marriage proposals recently.')
 
 
 def undefined(text):
