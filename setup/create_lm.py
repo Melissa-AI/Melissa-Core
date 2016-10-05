@@ -21,11 +21,13 @@ def get_language_model():
     register_openers()
 
     data1 = encode.MultipartParam("formtype", "simple")
-    data2 = encode.MultipartParam.from_file("corpus", "./data/model/phrase_list.txt")
+    data2 = encode.MultipartParam.from_file(
+        "corpus", "./data/model/phrase_list.txt")
     datagen, headers = encode.multipart_encode([data1, data2])
 
     # Create the Request object
-    request = urllib2.Request("http://www.speech.cs.cmu.edu/cgi-bin/tools/lmtool/run", datagen, headers)
+    request = urllib2.Request(
+        "http://www.speech.cs.cmu.edu/cgi-bin/tools/lmtool/run", datagen, headers)
     # Do the request, and get the response
     data = urllib2.urlopen(request).read()
 
@@ -42,13 +44,14 @@ def get_language_model():
     url_dir = url[:-len(base)]
 
     # Construct the url for LM download.
-    dic = url_dir+num_part+'.dic'
-    lm = url_dir+num_part+'.lm'
+    dic = url_dir + num_part + '.dic'
+    lm = url_dir + num_part + '.lm'
 
     # Download and save the LM.
     urllib.urlretrieve(dic, './data/model/lm/sphinx.dic')
     urllib.urlretrieve(lm, './data/model/lm/sphinx.lm')
     print 'Created ./data/model/lm/sphinx.dic and ./data/model/lm/sphinx.lm'
+
 
 def create_phrase_list():
     queries = ()
@@ -56,14 +59,15 @@ def create_phrase_list():
         queries = [line.rstrip().lower() for line in f]
 
     sql = "SELECT word_group " \
-         +"FROM word_groups " \
-         +"ORDER BY word_group"
+        + "FROM word_groups " \
+        + "ORDER BY word_group"
 
     actions_db.cur.execute(sql)
     word_groups = actions_db.cur.fetchall()
-    word_groups = [x[0].lower() for x in word_groups] # flatten list of tuples
+    word_groups = [x[0].lower() for x in word_groups]  # flatten list of tuples
 
-    queries.extend(word_groups) # combine the text queries and the mysql word groups.
+    # combine the text queries and the mysql word groups.
+    queries.extend(word_groups)
     queries_set = set(queries)
     if '' in queries_set:
         queries_set.remove('')
@@ -77,4 +81,3 @@ def main():
     get_language_model()
 
 main()
-

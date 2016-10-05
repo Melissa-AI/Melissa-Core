@@ -3,6 +3,7 @@ import unittest
 
 
 class PlaceholderTest(unittest.TestCase):
+
     def test(self):
         self.assertFalse(os.path.isfile('profile.json'))
 

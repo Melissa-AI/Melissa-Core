@@ -7,9 +7,9 @@ from imgurpython import ImgurClient
 from melissa import profile
 from melissa.tts import tts
 
-WORDS = {'image_uploader':   {'groups': ['upload']},
+WORDS = {'image_uploader': {'groups': ['upload']},
          'show_all_uploads': {'groups': [['all', 'uploads'],
-                              ['all', 'images'], ['uploads']]}}
+                                         ['all', 'images'], ['uploads']]}}
 
 
 def img_list_gen():

@@ -7,6 +7,7 @@ from profile_populator import profile_populator
 
 data = {}
 
+
 def load_profile():
     global data
     profile_json = open('profile.json')
@@ -20,4 +21,3 @@ if len(data) == 0:
     else:
         profile_populator()
         load_profile()
-
