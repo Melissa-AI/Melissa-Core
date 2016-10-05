@@ -2,6 +2,7 @@
 # How to get string objects instead of Unicode ones from JSON in Python?
 # http://stackoverflow.com/questions/956867/how-to-get-string-objects-instead-of-unicode-ones-from-json-in-python/6633651#6633651
 
+
 def decode_list(data):
     rv = []
     for item in data:
@@ -13,6 +14,7 @@ def decode_list(data):
             item = decode_dict(item)
         rv.append(item)
     return rv
+
 
 def decode_dict(data):
     rv = {}

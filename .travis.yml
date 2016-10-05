@@ -2,8 +2,10 @@ language: python
 python:
   - "2.7"
 sudo: true
-install: 
+install:
+  - pip install flake8
   - "curl -O https://raw.githubusercontent.com/Melissa-AI/Melissa-Core/master/setup/travis-build-core.sh && chmod +x travis-build-core.sh && ./travis-build-core.sh"
   - "cp data/memory.db.default data/memory.db"
-script: 
+script:
+  - flake8
   - "python tests/check_profile.py"

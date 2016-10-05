@@ -17,7 +17,7 @@ def weather(text):
     degrees_type = 'celcius'
 
     if profile.data['degrees'] == 'fahrenheit':
-        temperature = (temperature * 9/5) + 32
+        temperature = (temperature * 9 / 5) + 32
         degrees_type = 'fahrenheit'
 
     weather_result = "Weather.com says: It is " + \

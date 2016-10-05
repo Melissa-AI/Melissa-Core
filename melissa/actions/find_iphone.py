@@ -5,10 +5,12 @@ from pyicloud.exceptions import PyiCloudFailedLoginException
 from melissa import profile
 from melissa.tts import tts
 
-WORDS = {'find_iphone': {'groups': [['find', 'iphone'], ['ring', 'iphone']]}, 'iphone_battery': {'groups': [['battery', 'iphone']]}}
+WORDS = {'find_iphone': {'groups': [['find', 'iphone'], [
+    'ring', 'iphone']]}, 'iphone_battery': {'groups': [['battery', 'iphone']]}}
 
 ICLOUD_USERNAME = profile.data['icloud']['username']
 ICLOUD_PASSWORD = profile.data['icloud']['password']
+
 
 def find_iphone(text):
     try:
@@ -45,6 +47,7 @@ def find_iphone(text):
             phone_to_ring = phone
             phone_to_ring.play_sound()
             tts("Sending ring command to the phone now")
+
 
 def iphone_battery(text):
     try:

@@ -27,6 +27,6 @@ def ip_address(text):
             updated_addresses = [re.sub(r"\.", r" dot ", address)
                                  for address in addresses]
             tts('%s: %s' % ("interface: " + ifaceName +
-                ", I.P. Address ", ', '.join(updated_addresses)))
+                            ", I.P. Address ", ', '.join(updated_addresses)))
 
     tts("Those are all my I.P. addresses.")

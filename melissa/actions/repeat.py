@@ -1,5 +1,4 @@
 # Melissa
-from melissa import profile
 from melissa.tts import tts
 
 
