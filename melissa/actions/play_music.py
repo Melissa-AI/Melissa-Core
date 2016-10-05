@@ -7,26 +7,40 @@ import random
 from melissa import profile
 from melissa.tts import tts
 
-WORDS = {'play_shuffle': {'groups': [['party', 'time'], ['party', 'mix']]},
-         'play_random': {'groups': [['play', 'music'], 'music']},
-         'play_specific_music': {'groups': ['play']}
-        }
+WORDS = {
+    'play_shuffle': {
+        'groups': [
+            ['party', 'time'],
+            ['party', 'mix']
+        ]
+    },
+    'play_random': {
+        'groups': [
+            ['play', 'music'],
+            'music']
+    },
+    'play_specific_music': {
+        'groups': ['play']
+    }
+}
 
-sox_file_types = ['.wav','.flac','ogg']
+sox_file_types = ['.wav', '.flac', 'ogg']
 music_listing = None
+
 
 def mp3gen():
     """
-    This function finds all the mp3 files in a folder and it's subfolders and returns a list.
+    This function finds all the mp3 files in a folder
+    and it's subfolders and returns a list.
     """
     global music_listing
 
-    if music_listing != None:
+    if music_listing is not None:
         return
 
     if sys.platform != 'darwin' \
-    and sys.platform != 'win32' \
-    and not sys.platform.startswith('linux'):
+            and sys.platform != 'win32' \
+            and not sys.platform.startswith('linux'):
         print "Music only enabled on darwin, win32, and linux."
         return
 
@@ -48,12 +62,15 @@ def mp3gen():
                         'play',
                         os.path.join(root, filename.lower())])
 
+
 def music_player(music_selection):
     """
-    This function takes the name of a music file as an argument and plays it depending on the OS.
+    This function takes the name of a music file as an argument
+    and plays it depending on the OS.
     """
     player = music_selection[0] + " '" + music_selection[1] + "'"
     return os.system(player)
+
 
 def play_random(text):
     try:
@@ -67,6 +84,7 @@ def play_random(text):
         tts('No music files found.')
         print("No music files found: {0}".format(e))
 
+
 def play_specific_music(speech_text):
     words_of_message = speech_text.split()
     words_of_message.remove('play')
@@ -76,6 +94,7 @@ def play_specific_music(speech_text):
     for i in range(0, len(music_listing)):
         if cleaned_message in music_listing[i][1]:
             music_player(music_listing[i])
+
 
 def play_shuffle(text):
     try:
@@ -87,4 +106,3 @@ def play_shuffle(text):
     except IndexError as e:
         tts('No music files found.')
         print("No music files found: {0}".format(e))
-
