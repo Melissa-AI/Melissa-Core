@@ -115,6 +115,11 @@ def profile_populator():
     if len(icloud_username) > 0:
         icloud_password = getpass()
 
+    tts = 'xxxx'
+
+    access_key = 'xxxx'
+    secret_key = 'xxxx'
+
     access_token = 'xxxx'
     access_token_secret = 'xxxx'
     consumer_key = 'xxxx'
@@ -139,6 +144,7 @@ def profile_populator():
         'va_gender': va_gender,
         'name': name,
         'stt': stt,
+        'tts': tts,
         'telegram_username': telegram_username,
         'telegram_token': telegram_token,
         'music_path': music_path,
@@ -161,6 +167,10 @@ def profile_populator():
         'imgur': {
             'client_id': client_id,
             'client_secret': client_secret
+        },
+        'ivona': {
+            'access_key': access_key,
+            'secret_key': secret_key
         },
         'gmail': {
             'address': gmail_address,
