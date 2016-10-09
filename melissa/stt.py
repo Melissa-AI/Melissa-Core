@@ -18,32 +18,29 @@ except:
 # Melissa
 import profile
 from tts import tts
-import brain
 
 
 def stt():
     va_name = profile.data['va_name']
     r = sr.Recognizer()
-    tts('Welcome ' + profile.data['name'] +
-        ', systems are now ready to run. How can I help you?')
     if profile.data['stt'] == 'google':
-        while True:
-            with sr.Microphone() as source:
-                print("Say something!")
-                audio = r.listen(source)
 
-            try:
-                speech_text = r.recognize_google(
-                    audio).lower().replace("'", "")
-                print(va_name + " thinks you said '" + speech_text + "'")
-            except sr.UnknownValueError:
-                print(va_name + " could not understand audio")
-            except sr.RequestError as e:
-                print(
-                    "Could not request results from Google" +
-                    "Speech Recognition service; {0}".format(e))
-            else:
-                brain.query(speech_text)
+        with sr.Microphone() as source:
+            print("Say something!")
+            audio = r.listen(source)
+
+        try:
+            speech_text = r.recognize_google(
+                audio).lower().replace("'", "")
+            print(va_name + " thinks you said '" + speech_text + "'")
+        except sr.UnknownValueError:
+            print(va_name + " could not understand audio")
+        except sr.RequestError as e:
+            print(
+                "Could not request results from Google" +
+                "Speech Recognition service; {0}".format(e))
+        else:
+            return speech_text
 
     elif profile.data['stt'] == 'sphinx':
 
@@ -76,20 +73,19 @@ def stt():
             else:
                 return ''
 
-        while True:
-            with sr.Microphone() as source:
-                print("Say something!")
-                audio = r.listen(source)
+        with sr.Microphone() as source:
+            print("Say something!")
+            audio = r.listen(source)
 
-            with open("recording.wav", "wb") as f:
-                f.write(audio.get_wav_data())
+        with open("recording.wav", "wb") as f:
+            f.write(audio.get_wav_data())
 
-            brain.query(sphinx_stt())
+        return sphinx_stt()
 
     elif profile.data['stt'] == 'keyboard':
-        while True:
-            keyboard_text = raw_input('Write something: ')
-            brain.query(keyboard_text)
+
+        keyboard_text = raw_input('Write something: ')
+        return keyboard_text
 
     elif profile.data['stt'] == 'telegram':
         def handle(msg):
@@ -100,7 +96,7 @@ def stt():
             if username == profile.data['telegram_username']:
                 print(profile.data['va_name'] +
                       " thinks you said '" + command + "'")
-                brain.query(command)
+                return command
             else:
                 error_msg = 'You are not authorised to use this bot.'
                 bot.sendMessage(chat_id, error_msg)
