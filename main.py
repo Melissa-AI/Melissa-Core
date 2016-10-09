@@ -11,6 +11,10 @@ def main():
 
     while True:
         text = stt()
-        query(text)
+
+        if text is None:
+            continue
+        else:
+            query(text)
 
 main()
