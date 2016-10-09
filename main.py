@@ -1,20 +1,36 @@
+import signal
+import subprocess
+
 # Melissa
 from melissa import profile
-from melissa.tts import tts
-from melissa.stt import stt
-from melissa.brain import query
+from melissa.utilities import snowboydecoder
+
+interrupted = False
+subprocess.call(['python', 'start.py'])
 
 
-def main():
-    tts('Welcome ' + profile.data['name'] +
-        ', systems are now ready to run. How can I help you?')
+def signal_handler(signal, frame):
+    global interrupted
+    interrupted = True
 
-    while True:
-        text = stt()
 
-        if text is None:
-            continue
-        else:
-            query(text)
+def interrupt_callback():
+    global interrupted
+    return interrupted
 
-main()
+
+def melissa_activate():
+    subprocess.call(['python', 'start.py'])
+
+model = 'data/snowboy_resources/Melissa.pmdl'
+
+signal.signal(signal.SIGINT, signal_handler)
+
+detector = snowboydecoder.HotwordDetector(model, sensitivity=0.5)
+
+if profile.data['hotword_detection'] == 'on':
+    detector.start(detected_callback=melissa_activate,
+                   interrupt_check=interrupt_callback,
+                   sleep_time=0.03)
+
+    detector.terminate()
