@@ -15,7 +15,7 @@ def what_is_time(text):
 
 
 def what_is_date(text):
-    tts("The date is " + datetime.strftime(datetime.now(), '%d/%m/%Y'))
+    tts("The date is " + datetime.strftime(datetime.now(), '%m/%d/%Y'))
 
 
 def what_is_day(text):
