@@ -117,6 +117,8 @@ def profile_populator():
 
     tts = 'xxxx'
 
+    hotword_detection = 'on'
+
     access_key = 'xxxx'
     secret_key = 'xxxx'
 
@@ -145,6 +147,7 @@ def profile_populator():
         'name': name,
         'stt': stt,
         'tts': tts,
+        'hotword_detection': hotword_detection,
         'telegram_username': telegram_username,
         'telegram_token': telegram_token,
         'music_path': music_path,
