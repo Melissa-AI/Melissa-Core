@@ -14,7 +14,7 @@ def post_tweet(text):
             or profile.data['twitter']['access_token'] == "xxxx" \
             or profile.data['twitter']['access_token_secret'] == "xxxx":
 
-        msg = "twitter requires a consumer key and secret," \
+        msg = "Twitter requires a consumer key and secret," \
               " and an access token and token secret."
         print msg
         tts(msg)
