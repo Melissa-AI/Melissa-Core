@@ -102,7 +102,7 @@ def stt():
                 bot.sendMessage(chat_id, error_msg)
 
         if profile.data['telegram_token'] == 'xxxx':
-            tts('Please enter a Telegram token or configure a different' +
+            tts('Please enter a Telegram token or configure a different ' +
                 'STT in the profile.json file.')
             quit()
         else:
