@@ -94,7 +94,7 @@ def profile_populator():
  or <ENTER> for a search based on the name\
  of the city you live in: ')
     if empty(city_code):
-        city_list = pywapi.get_loc_id_from_weather_com(city_name)
+        city_list = pywapi.get_loc_id_from_weather_com(unicode(city_name))
         if city_list['count'] == 0:
             print 'Sorry, search results were empty.'
             city_code = 'INXX0096'
