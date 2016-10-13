@@ -37,7 +37,7 @@ SpeechRecognition==3.1.3
 telepot==4.1
 
 # Text To Speech Module
-pygame==1.9.2b6
+pygame>=1.9.2b6
 pyvona==1.1
 
 # Creating Sphinx Language Model
