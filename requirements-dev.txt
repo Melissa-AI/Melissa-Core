@@ -1,8 +1,10 @@
 -r requirements.txt
+
 flake8==3.0.4
 mock==2.0.0
 pytest==3.0.3
 
 # Weather
-# this is included here to pass the travis check.
+
+# This is included here to pass the Travis check.
 https://launchpad.net/python-weather-api/trunk/0.3.8/+download/pywapi-0.3.8.tar.gz
