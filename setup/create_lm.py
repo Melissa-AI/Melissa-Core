@@ -7,7 +7,14 @@ import urllib
 from bs4 import BeautifulSoup
 
 # Melissa
-import melissa.actions_db as actions_db
+try:
+    import melissa.actions_db as actions_db
+except ImportError:
+    import sys, os
+    sys.path.insert(0,
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    import melissa.actions_db as actions_db
+    del sys.path[0]
 
 # Poster
 import poster.encode as encode
