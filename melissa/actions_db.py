@@ -146,7 +146,7 @@ def insert_words(con, cur, name, words, priority):
 
     else:
         print "Invalid WORDS type '%s' for module %s"\
-            % type(words), name
+            % (type(words), name)
 
 
 def assemble_actions_db():
