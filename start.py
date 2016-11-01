@@ -2,14 +2,15 @@ import sys
 import subprocess
 
 # Melissa
-from melissa import profile
+from melissa.profile_loader import load_profile
 from melissa.tts import tts
 from melissa.stt import stt
 from melissa.brain import query
 
 
 def main():
-    tts('Welcome ' + profile.data['name'] +
+    data = load_profile(True)
+    tts('Welcome ' + data['name'] +
         ', how can I help you?')
 
     while True:

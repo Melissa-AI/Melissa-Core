@@ -2,8 +2,10 @@ import signal
 import subprocess
 
 # Melissa
-from melissa import profile
+from melissa.profile_loader import load_profile
 from melissa.utilities import snowboydecoder
+
+data = load_profile(True)
 
 interrupted = False
 subprocess.call(['python', 'start.py'])
@@ -28,7 +30,7 @@ signal.signal(signal.SIGINT, signal_handler)
 
 detector = snowboydecoder.HotwordDetector(model, sensitivity=0.5)
 
-if profile.data['hotword_detection'] == 'on':
+if data['hotword_detection'] == 'on':
     detector.start(detected_callback=melissa_activate,
                    interrupt_check=interrupt_callback,
                    sleep_time=0.03)
