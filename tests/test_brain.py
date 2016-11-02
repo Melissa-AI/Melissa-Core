@@ -1,8 +1,5 @@
 """test for brain module."""
-import json
-import os
 import unittest
-from shutil import copyfile
 try:  # py3
     from unittest import mock
 except ImportError:  # py2
@@ -11,10 +8,10 @@ except ImportError:  # py2
 import pytest
 
 
-FULL_TEST_ERR_REASON = 'Not working on full test.'
+NOT_WORKING_ON_FULL_TEST = "Not working on full test."
 
 
-@pytest.mark.xfail(reason=FULL_TEST_ERR_REASON)
+@pytest.mark.xfail(reason=NOT_WORKING_ON_FULL_TEST)
 def test_simple_import():
     """test simple error import.
 
@@ -25,7 +22,7 @@ def test_simple_import():
         from melissa import brain  # NOQA
 
 
-@pytest.mark.xfail(reason=FULL_TEST_ERR_REASON)
+@pytest.mark.xfail(reason=NOT_WORKING_ON_FULL_TEST)
 def test_import_and_mock_populator():
     """test mock profile_populator module when import this module.
 
@@ -37,33 +34,17 @@ def test_import_and_mock_populator():
             from melissa import brain  # NOQA
 
 
-class WithProfileTest(unittest.TestCase):
-    """test case using temp profile."""
-
-    def setUp(self):
-        """setup func."""
-        profile = {
+@mock.patch(
+    'melissa.profile_loader.load_profile',
+    return_value={
             'actions_db_file': ':memory:',
             'modules': 'melissa.actions',
         }
-        self.json_file = 'profile.json'
-        self.bak_file = self.json_file + 'brain-test.bak'
-        if os.path.isfile(self.json_file):
-            self.json_file_exist = True
-            copyfile(self.json_file, self.bak_file)
-        else:
-            self.json_file_exist = False
-        with open(self.json_file, 'w') as f:
-            json.dump(profile, f)
+)
+class WithProfileTest(unittest.TestCase):
+    """test case using temp profile."""
 
-    def tearDown(self):
-        """tear down func."""
-        os.remove(self.json_file)
-        # restore the backup
-        if self.json_file_exist:
-            copyfile(self.bak_file, self.json_file)
-
-    def test_simple_mock_input(self):
+    def test_simple_mock_input(self, m_load_profile):
         """test run til finished with multiple mock."""
         mock_text = mock.Mock()
         with mock.patch(
@@ -79,7 +60,7 @@ class WithProfileTest(unittest.TestCase):
                     assert not mock_acdb.called
                     assert not mock_adb.called
 
-    def test_simple_text_input(self):
+    def test_simple_text_input(self, m_load_profile):
         """test run til finished with multiple mock."""
         mock_text = 'hello world'
         with mock.patch(

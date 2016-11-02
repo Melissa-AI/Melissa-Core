@@ -1,6 +1,4 @@
 """test for actions_db module."""
-import json
-from shutil import copyfile
 import os
 import unittest
 from StringIO import StringIO
@@ -34,25 +32,18 @@ def test_import_and_mock_populator():
             from melissa import actions_db  # NOQA
 
 
+@mock.patch(
+    'melissa.profile_loader.load_profile',
+    return_value={
+            'actions_db_file': ':memory:',
+            'modules': 'melissa.actions',
+        }
+)
 class WithProfileTest(unittest.TestCase):
     """test case using temp profile."""
 
     def setUp(self):
         """setup func."""
-        profile = {
-            'actions_db_file': ':memory:',
-            'modules': 'melissa.actions',
-        }
-        self.json_file = 'profile.json'
-        self.bak_file = self.json_file + 'actions_db-test.bak'
-        if os.path.isfile(self.json_file):
-            self.json_file_exist = True
-            copyfile(self.json_file, self.bak_file)
-        else:
-            self.json_file_exist = False
-        with open(self.json_file, 'w') as f:
-            json.dump(profile, f)
-
         # execscript argument
         self.exec_script_arg = (
             '\n            '
@@ -84,18 +75,11 @@ class WithProfileTest(unittest.TestCase):
             '\n            '
         )
 
-    def tearDown(self):
-        """tear down func."""
-        os.remove(self.json_file)
-        # restore the backup
-        if self.json_file_exist:
-            copyfile(self.bak_file, self.json_file)
-
-    def test_actions_db_import(self):
+    def test_actions_db_import(self, m_load_profile):
         """test run."""
         from melissa import actions_db  # NOQA
 
-    def test_create_actions_db_mocked_inputs(self):
+    def test_create_actions_db_mocked_inputs(self, m_load_profile):
         """test run create_actions_db with mocked inputs."""
         from melissa.actions_db import create_actions_db
         mock_con = mock.Mock()
@@ -104,7 +88,7 @@ class WithProfileTest(unittest.TestCase):
         mock_con.commit.assert_called_once_with()
         mock_cur.executescript.assert_called_once_with(self.exec_script_arg)
 
-    def test_create_actions_db_raise_sqlite3_error(self):
+    def test_create_actions_db_raise_sqlite3_error(self, m_load_profile):
         """test run create_actions_db and raise sqlite3 error."""
         from melissa.actions_db import create_actions_db
         mock_con = mock.Mock()
@@ -116,12 +100,12 @@ class WithProfileTest(unittest.TestCase):
                 create_actions_db(mock_con, mock_cur)
             assert 'Error {}:\n'.format(mock_err_msg) in mock_stdout.getvalue()
 
-    def test_assemble_actions_db(self):
+    def test_assemble_actions_db(self, m_load_profile):
         """test run func."""
         from melissa.actions_db import assemble_actions_db
         assemble_actions_db()
 
-    def test_assemble_actions_db_mock_sqlite(self):
+    def test_assemble_actions_db_mock_sqlite(self, m_load_profile):
         """test run func and mock libs."""
         from melissa.actions_db import assemble_actions_db
         with mock.patch('melissa.actions_db.sqlite3') as mock_sq:
@@ -147,18 +131,30 @@ class WithProfileTest(unittest.TestCase):
         (mock_sq.connect.return_value.cursor.return_value
                 .executescript.assert_called_once_with(self.exec_script_arg))
         # connect().commit
-        assert mock_sq.connect.return_value.commit.call_count == 18
         mock_sq.connect.return_value.commit.assert_called_with()
+        # test sql commands.
+        call_result = (
+            mock_sq.connect.return_value.cursor.return_value
+            .execute.mock_calls)
+        call_result_args = [x[1][0] for x in call_result]
+        non_exist_expected_call = [
+            x for x in sql_cmds if x not in call_result_args]
+        not_expected_call = [
+            x for x in call_result_args if x not in sql_cmds]
         # connect().cursor().execute
-        assert len(
-            mock_sq.connect.return_value.cursor.return_value.execute
-            .mock_calls) == 218
+        err_msg = (
+            'Expected calls which are not exist on actual call:\n{}\n'
+            'Actual calls which are not expected:\n{}'
+        )
+        err_msg = err_msg.format(
+            '\n'.join(non_exist_expected_call),
+            '\n'.join(not_expected_call),
+        )
+        assert len(call_result_args) == len(sql_cmds), err_msg
         for cmd in sql_cmds:
-            assert mock.call(cmd) in (
-                mock_sq.connect.return_value.cursor.return_value
-                .execute.mock_calls)
+            assert mock.call(cmd) in call_result, err_msg
 
-    def test_insert_words_mock_input_and_name_input(self):
+    def test_insert_words_mock_input_and_name_input(self, m_load_profile):
         """test run insert_words with mock input."""
         m_name = mock.Mock()
         input_string = 'name'
@@ -177,7 +173,7 @@ class WithProfileTest(unittest.TestCase):
                     "for module {}".format(mock_name)
                 ) in mock_stdout.getvalue()
 
-    def test_insert_words_mock_input_and_words_list(self):
+    def test_insert_words_mock_input_and_words_list(self, m_load_profile):
         """test run insert_words with mock input and words as list."""
         mock_name = 'how'
         mock_con = mock.Mock()
@@ -211,7 +207,7 @@ class WithProfileTest(unittest.TestCase):
             mock_con.commit.assert_called_once_with()
             assert '' in mock_stdout.getvalue()
 
-    def test_insert_words_mock_input_and_words_dict(self):
+    def test_insert_words_mock_input_and_words_dict(self, m_load_profile):
         """test run insert_words with mock input and words as dict."""
         mock_name = 'define'
         mock_con = mock.Mock()
