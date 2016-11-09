@@ -8,6 +8,9 @@ install:
   - pip install -r ./requirements-dev.txt
 script:
   - flake8
-  - "python -m pytest --cov=melissa --cov-config=.coveragerc"
+  - "python -m pytest 
+     --cov=melissa \
+     --cov=start \
+     --cov-config=.coveragerc"
 after_success:
   - bash <(curl -s https://codecov.io/bash)

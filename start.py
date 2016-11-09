@@ -26,4 +26,5 @@ def main():
         else:
             query(text)
 
-main()
+if __name__ == "__main__":
+    main()
