@@ -120,7 +120,7 @@ class WithProfileTest(unittest.TestCase):
             sql_cmds = f.read().splitlines()
 
         # testing
-        assert len(mock_sq.mock_calls) == 239
+        assert len(mock_sq.mock_calls) == 240
         # connect
         assert mock_sq.connect.call_count == 1
         mock_sq.connect.assert_called_once_with(

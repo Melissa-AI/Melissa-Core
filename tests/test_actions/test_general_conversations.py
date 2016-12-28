@@ -27,7 +27,6 @@ CHOICE_RETVAL = mock.Mock()
         ('who_am_i',
             'You are {}, a brilliant person. '
             'I love you!'.format(M_USER_NAME)),
-        ('tell_joke', CHOICE_RETVAL),
         ('how_am_i', CHOICE_RETVAL),
         ('toss_coin', CHOICE_RETVAL),
         ('who_are_you', CHOICE_RETVAL),
@@ -65,7 +64,6 @@ def test_general_conversation(arg, tts_arg):
                 'how_are_you': general_conversations.how_are_you,
                 'where_born': general_conversations.where_born,
                 'who_am_i': general_conversations.who_am_i,
-                'tell_joke': general_conversations.tell_joke,
                 'how_am_i': general_conversations.how_am_i,
                 'toss_coin': general_conversations.toss_coin,
                 'who_are_you': general_conversations.who_are_you,
