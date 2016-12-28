@@ -17,7 +17,6 @@ def signal_handler(signal, frame):
 
 
 def interrupt_callback():
-    global interrupted
     return interrupted
 
 

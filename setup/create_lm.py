@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 try:
     import melissa.actions_db as actions_db
 except ImportError:
-    import sys, os
+    import sys
     sys.path.insert(0,
         os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     import melissa.actions_db as actions_db

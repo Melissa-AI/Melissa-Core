@@ -321,7 +321,7 @@ def test_existing_path():
     for data_key, question in data:
         m = mock.mock_open()
 
-        def mock_input_side_effect(arg):
+        def mock_input_side_effect(arg):  # NOQA
             if arg == question:
                 return random_path
             return ''

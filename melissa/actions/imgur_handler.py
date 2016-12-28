@@ -15,7 +15,7 @@ WORDS = {'image_uploader': {'groups': ['upload']},
 def img_list_gen():
     image_list = []
     valid_image_extensions = [".tiff", ".png", ".gif", ".jpg"]
-    for root, dirs, files in os.walk(profile.data['images_path']):
+    for root, _, files in os.walk(profile.data['images_path']):
         for filename in files:
             if os.path.splitext(filename)[1] in valid_image_extensions:
                 image_list.append(os.path.join(root, filename.lower()))

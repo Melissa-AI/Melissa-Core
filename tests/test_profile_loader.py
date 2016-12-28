@@ -27,7 +27,7 @@ def test_load_profile(skip_message, isfile_retval):
         from melissa.utilities import json_decode as jd
         res = load_profile(skip_message=skip_message)
         # testing
-        res == m_json.load.return_value
+        assert res == m_json.load.return_value
         m_os.path.isfile.assert_called_once_with('profile.json')
         if isfile_retval:
             m_pp.assert_not_called()

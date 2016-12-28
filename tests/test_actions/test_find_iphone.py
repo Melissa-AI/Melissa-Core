@@ -40,7 +40,7 @@ def test_find_iphone():
 class WithProfileTest(TestCase):
     """test case with profile."""
 
-    def test_find_iphone(self):
+    def test_find_iphone_with_profile(self):
         """test find_iphone func.
 
         when given with all mocked dependencies,

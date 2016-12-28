@@ -170,7 +170,7 @@ def assemble_actions_db():
         print 'Successfully Created ' + profile.data['actions_db_file']
 
     package = importlib.import_module(profile.data['modules'])
-    for finder, name, ispkg in pkgutil.walk_packages(package.__path__):
+    for finder, name, _ in pkgutil.walk_packages(package.__path__):
         print 'Loading module ' + name
         try:
             loader = finder.find_module(name)
