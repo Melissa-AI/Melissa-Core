@@ -8,7 +8,6 @@ WORDS = {'who_are_you': {'groups': [['who', 'are', 'you']]},
          'toss_coin': {'groups': [['heads', 'tails'],
                                   ['toss', 'coin'], ['flip', 'coin']]},
          'how_am_i': {'groups': [['how', 'i', 'look'], ['how', 'am', 'i']]},
-         'tell_joke': {'groups': [['tell', 'joke']]},
          'who_am_i': {'groups': [['who', 'am', 'i']]},
          'where_born': {'groups': [['where', 'born']]},
          'how_are_you': {'groups': [['how', 'are', 'you']]},
@@ -39,22 +38,6 @@ def how_am_i(text):
         'You look like the kindest person that I have met.'
     ]
     tts(random.choice(replies))
-
-
-def tell_joke(text):
-    jokes = [
-        'What happens to a frogs car when it breaks down? It gets toad away.',
-        'Why was six scared of seven? Because seven ate nine.',
-        'Why are mountains so funny? Because they are hill areas.',
-        'Have you ever tried to eat a clock?'
-        'I hear it is very time consuming.',
-        'What happened when the wheel was invented? A revolution.',
-        'What do you call a fake noodle? An impasta!',
-        'Did you hear about that new broom? It is sweeping the nation!',
-        'What is heavy forward but not backward? Ton.',
-        'No, I always forget the punch line.'
-    ]
-    tts(random.choice(jokes))
 
 
 def who_am_i(text):
