@@ -139,6 +139,17 @@ the city of your choice: ')
     if len(icloud_username) > 0:
         icloud_password = getpass()
 
+    while(True):
+        push_bullet = raw_input('Enter your Pushbullet token: ')
+        if empty(push_bullet):
+            break
+        elif not isinstance(push_bullet, str):
+            print("Invalid token")
+        elif push_bullet[0:2] != "o.":
+            print("Invalid token")
+        else:
+            break
+
     tts = 'xxxx'
 
     hotword_detection = 'on'
@@ -207,6 +218,7 @@ the city of your choice: ')
             'username': icloud_username,
             'password': icloud_password
         },
+        'pushbullet': push_bullet,
         'modules': modules,
         'actions_db_file': actions_db_file,
         'memory_db': memory_db

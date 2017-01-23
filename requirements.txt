@@ -42,3 +42,6 @@ pyvona==1.1
 
 # Creating Sphinx Language Model
 poster==0.8.1
+
+# Notification System
+pushbullet.py==0.10.0

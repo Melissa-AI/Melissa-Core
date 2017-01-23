@@ -76,7 +76,7 @@ def test_run_empty_input():
             mock.patch('melissa.profile_populator.json') as mock_json:
         profile_populator()
 
-        assert mock_input.call_count == 13
+        assert mock_input.call_count == 14
         input_calls = [
             mock.call('What would you like to name me?: '),
             mock.call('What is my gender ((m)ale/(f)emale)?: '),
@@ -94,7 +94,8 @@ def test_run_empty_input():
             mock.call('Enter the index of the city of your choice: '),
             mock.call('(c)elsius/(f)ahrenheit): '),
             mock.call('Enter your gmail address (???@gmail.com): '),
-            mock.call('Enter your icloud username/address (???@???.com): ')
+            mock.call('Enter your icloud username/address (???@???.com): '),
+            mock.call('Enter your Pushbullet token: ')
         ]
         for call in input_calls:
             assert call in mock_input.mock_calls
@@ -124,6 +125,7 @@ def test_run_empty_input():
             'telegram_token': 'xxxx',
             'telegram_username': 'tanay1337',
             'tts': 'xxxx',
+            'pushbullet': '',
             'twitter': {
                 'access_token': 'xxxx', 'access_token_secret': 'xxxx',
                 'consumer_key': 'xxxx', 'consumer_secret': 'xxxx'},
@@ -596,3 +598,24 @@ def test_random_platform_tts_local():
         res = tts_local(mock_message)
         assert not mock_subprocess.call_count
         assert res is None
+
+
+@pytest.mark.parametrize('first_retval', [3, 'random_string'])
+def test_push_bullet(first_retval):
+    """test pushbullet.
+
+    the test have to mock pywapi, because it raise error.
+    """
+    question = 'Enter your Pushbullet token: '
+    invalid_input_message = 'Invalid token'
+    with mock.patch('melissa.profile_populator.raw_input') as m_input, \
+            mock.patch('sys.stdout', new_callable=StringIO) as m_stdout, \
+            mock.patch('melissa.profile_populator.pywapi') as m_pywapi:
+        m_pywapi.get_loc_id_from_weather_com.return_value = {'count': 0}
+        side_effect = InputSideEffect(
+            question=question, first_return_value=first_retval)
+        m_input.side_effect = side_effect.func
+        # run the func.
+        profile_populator()
+        # test
+        assert invalid_input_message in m_stdout.getvalue()
