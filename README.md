@@ -6,6 +6,10 @@
 
 Melissa is a <del>virtual</del> assistant for OS X, Windows and Linux systems. She currently uses either Google's speech-to-text engine or CMU's Sphinx, OS X's `say` command or Linux's `espeak` command along with some magical scripting which makes her alive, developed by [Tanay Pant](http://tanaypant.com) and a group of sorcerers.
 
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=r1yoaq3BcUA"><img src="http://i.imgur.com/OmsI07v.gif"></a>
+</p>
+
 Check out our [wiki](https://github.com/Melissa-AI/Melissa-Core/wiki), where we have installation and configuration instructions, usage guide as well as relevant documentation.
 
 ### Discussion and Support
