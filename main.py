@@ -1,37 +1,33 @@
-import signal
-import subprocess
+from flask import Flask, render_template
+from flask_socketio import SocketIO
 
 # Melissa
 from melissa.profile_loader import load_profile
-from melissa.utilities import snowboydecoder
+from melissa.tts import tts
+from melissa.brain import query
+
+app = Flask(__name__)
+socketio = SocketIO(app)
 
 data = load_profile(True)
-
-interrupted = False
-subprocess.call(['python', 'start.py'])
+tts('Welcome ' + data['name'] + ', how can I help you?')
 
 
-def signal_handler(signal, frame):
-    global interrupted
-    interrupted = True
+@app.route("/")
+def hello():
+    return render_template('index.html')
 
 
-def interrupt_callback():
-    return interrupted
+@socketio.on('user speaks')
+def handle_json(json):
+    speech_text = json['data']
+    print('Melissa thinks you said: ' + speech_text)
 
+    # emit('melissa replies', 'thank you')
 
-def melissa_activate():
-    subprocess.call(['python', 'start.py'])
+    if speech_text is None:
+        pass
+    else:
+        query(speech_text)
 
-model = 'data/snowboy_resources/Melissa.pmdl'
-
-signal.signal(signal.SIGINT, signal_handler)
-
-detector = snowboydecoder.HotwordDetector(model, sensitivity=0.5)
-
-if data['hotword_detection'] == 'on':
-    detector.start(detected_callback=melissa_activate,
-                   interrupt_check=interrupt_callback,
-                   sleep_time=0.03)
-
-    detector.terminate()
+socketio.run(app)

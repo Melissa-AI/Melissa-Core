@@ -1,0 +1,327 @@
+/* CSS Document */
+body{
+	padding:0;
+	color:#73d8fd;
+	position:relative;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	background-image:url(http://localhost:5000/static/images/CarbonFiber_2.jpg);
+    vertical-align: middle;
+}
+
+.fauxBody,.fauxBody1,.fauxBody2{
+	width:1366px;
+	height:768px;
+	position:absolute;
+	z-index:-50;
+}
+
+.soundCont, .soundCont1, .soundCont2{
+	height:0px;
+	width:0px;
+}
+
+ul{
+	list-style-type: none;
+	padding:0;
+	margin:0;
+}
+
+#wrapper{
+    position: relative;
+    margin: 0 auto;
+    width:1366px;
+	height:768px;
+    overflow: hidden;
+    margin-top: calc(25% - 384px);
+}
+
+/*----------------------------------Background Animations-----------------------------------*/
+.bgAnimRing{
+	top:-230px;
+	left:-230px;
+	position:absolute;
+	width:700px;
+	height:700px;
+	z-index:-40;
+	opacity:.3;
+}
+
+.bgAnimRing1{
+	opacity:0;
+	top:248px;
+	left:248px;
+	width:205px;
+	height:205px;
+	position:absolute;
+	z-index:-40;
+	background-image:url(http://localhost:5000/static/images/bgAnim1.png);
+}
+
+.bgAnimRing2{
+	opacity:0;
+	top:75px;
+	left:75px;
+	width:550px;
+	height:550px;
+	position:absolute;
+	z-index:-40;
+	background-image:url(http://localhost:5000/static/images/bgAnim2.png);
+}
+
+.bgAnimRing3{
+	opacity:0;
+	width:700px;
+	height:700px;
+	position:absolute;
+	z-index:-40;
+	background-image:url(http://localhost:5000/static/images/bgAnim3.png);
+}
+
+.sineGraph{
+	opacity:0;
+	position:absolute;
+	top:-8px;
+	left:1180px;
+	width:150px;
+	height:50px;
+	background-image:url(http://localhost:5000/static/images/singraph.png);
+}
+
+.welcomeRings{
+	position:absolute;
+	left:333px;
+	width:700px;
+	height:700px;	
+}
+
+.welcomeRing1{
+	opacity:.6;
+	position:absolute;
+	top:150px;
+	left:150px;
+	width:400px;
+	height:400px;
+	background-image:url(http://localhost:5000/static/images/welcomeRing1R.png);
+	background-repeat:no-repeat;
+}
+
+.welcomeRing2{
+	opacity:.6;
+	position:absolute;
+	width:600px;
+	height:600px;
+	top:50px;
+	left:50px;
+	background-image:url(http://localhost:5000/static/images/welcomeRing2R.png);
+	background-repeat:no-repeat;
+}
+
+.welcomeRing3{
+	opacity:.6;
+	position:absolute;
+	width:700px;
+	height:700px;
+	background-image:url(http://localhost:5000/static/images/welcomeRing3R.png);
+	background-repeat:no-repeat;
+}
+
+.lockIcon{
+	position:absolute;
+	width:110px;
+	height:110px;
+	top:294px;
+	left:296px;
+	background-image:url(http://localhost:5000/static/images/lock.png);
+	background-repeat:no-repeat;
+}
+
+.popup{
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    background-image: url(http://localhost:5000/static/images/popup.png);
+    font-family: 'Ariel','Myriad Pro','Trebuchet', sans-serif;
+    font-size: 14px;
+}
+
+.popup p{
+    float: right;
+    margin: 120px 150px;
+}
+
+.popup div{
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: #73d8fd;
+    border: 1px solid #73d8fd;
+    font-size: 14px;
+    cursor: pointer;
+    position: absolute;
+    right: 150px;
+    bottom: 200px;
+}
+
+@font-face {
+    font-family: Neogrey;
+    src: url(NeogreyRegular.otf);
+}
+/*----------------------------------Side Bar Menu-----------------------------------*/
+.sideBarUl{
+	display:none;
+	position:absolute;
+	left:-10px;
+	width:360px;
+	z-index:100;
+	overflow:hidden;
+}
+
+.sideBarUl li{
+	opacity:0;
+	overflow:hidden;
+	padding-left:30px;
+	padding-right:35px;
+	font-family:'Neogrey';
+	font-size:24px;
+	line-height:100px;
+	width:330px;
+	height:100px;
+	clear:both;
+	background-image:url(http://localhost:5000/static/images/sideLiBG.png);
+	background-repeat:no-repeat;
+}
+
+.sideBarUl li:hover{
+	cursor:pointer;
+	color:#fff;
+	background-image:url(http://localhost:5000/static/images/sideLiBGHover.png);
+}
+
+/*----------------------------------Footer-----------------------------------*/
+
+.footerImg{
+	height:110px;
+	width:1366px;
+	position:absolute;
+	top:648px;
+	background-image:url(http://localhost:5000/static/images/footer.png);
+	z-index:0;
+}
+
+.semText{
+	font-family:'Neogrey';
+	position:absolute;
+	left:30px;
+	top:50px;
+	font-size:30px;
+}
+
+.juryText{
+	font-family:'Neogrey';
+	position:absolute;
+	left:460px;
+	top:36px;
+	font-size:36px;
+}
+
+.headText{
+	font-family:'Neogrey';
+	position:absolute;
+	width:400px;
+	left:700px;
+	top:-8px;
+	font-size:36px;
+}
+
+.infoText{
+	font-family:'Neogrey';
+	position:absolute;
+	width:400px;
+	left:380px;
+	top:5px;
+	font-size:20px;
+}
+
+.footerGraph{
+	width:300px;
+	height:70px;
+	position:absolute;
+	left:1010px;
+	top:672px;
+	z-index:1;	
+}
+
+.footerGraphUnit{
+	opacity:0;
+	width:70px;
+	height:70px;
+	margin-left:-40px;
+	float:left;
+	background-image:url(http://localhost:5000/static/images/footerGraph.png);
+}
+
+/*----------------------------------Image Gallery-----------------------------------*/
+#imgGalCont{
+	opacity:0;
+	position:absolute;
+	width:1220px;
+	height:620px;
+	left:1400px;
+	top:35px;
+	overflow:hidden;
+}
+
+#imgGalOut{
+	position: absolute;
+	width: 1220px;
+	height: 620px;
+	background-image: url(http://localhost:5000/static/images/imageGalBorder.png);
+	background-repeat: no-repeat;
+	background-color: transparent;
+	overflow:hidden;
+	z-index: 50;
+	left:0px;
+	top: 2px;
+}
+
+#imgGalIn{
+	font-family: 'Neogrey';
+	font-size: x-large;
+	position:absolute;
+	width:1000px;
+	height:100px;
+	left:50px;
+	top:50px;
+	overflow:hidden;
+	z-index:40;
+}
+
+#imgGalMid{
+	font-family: 'Neogrey';
+	font-size: x-large;
+	position:absolute;
+	width:1000px;
+	height:100px;
+	left:50px;
+	top:180px;
+	overflow:hidden;
+	z-index:40;
+}
+
+.cogErgo, .typography, .exDes, .resMeth, .openEl, .phyComp, .desProj {
+	position: relative;
+	overflow: auto;
+}
+
+.cogErgo li, .typography li, .exDes li, .resMeth li, .openEl li, .phyComp li, .desProj li{
+	list-style: none;
+}
+
+.cogErgo ul li, .typography ul li, .exDes ul li, .resMeth ul li, .openEl ul li, .phyComp ul li, .desProj ul li{
+	float: left;
+}

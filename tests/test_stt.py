@@ -8,6 +8,8 @@ except ImportError:  # py2
 
 import pytest
 
+skip_because_stt_removed = pytest.mark.skip(reason='stt module removed.')
+
 
 def get_random_string(exclude_list=None):
     """get random gender which is not 'female' or 'male'."""
@@ -48,6 +50,7 @@ def import_mock(name, *args):
     return orig_import(name, *args)
 
 
+@skip_because_stt_removed
 def test_run():
     """test run."""
     with mock.patch('__builtin__.__import__', side_effect=import_mock), \
@@ -59,6 +62,7 @@ def test_run():
     mock_sr.Recognizer.assert_called_once_with()
 
 
+@skip_because_stt_removed
 def test_run_google_stt_with_error():
     """test run with google stt with error.
 
@@ -95,6 +99,7 @@ def test_run_google_stt_with_error():
             assert call in mock_sr.mock_calls
 
 
+@skip_because_stt_removed
 def test_run_google_stt():
     """test run with google stt.
 
@@ -119,6 +124,7 @@ def test_run_google_stt():
         stt()
 
 
+@skip_because_stt_removed
 def test_run_sphinx_stt():
     """test run with sphinx stt.
 
@@ -185,6 +191,7 @@ def test_run_sphinx_stt():
             assert item in mock_decoder.mock_calls
 
 
+@skip_because_stt_removed
 def test_run_keyboard_stt():
     """test run with keyboard stt.
 
@@ -205,6 +212,7 @@ def test_run_keyboard_stt():
         assert mock.call('Write something: ') in mock_input.mock_calls
 
 
+@skip_because_stt_removed
 def test_run_telegram_stt_wrong_token():
     """test run with telegram stt with wrong token."""
     profile_data = default_profile_data
@@ -224,6 +232,7 @@ def test_run_telegram_stt_wrong_token():
         assert mock_tts.call_count == 1
 
 
+@skip_because_stt_removed
 def test_run_telegram_stt():
     """test run with telegram stt with wrong token."""
     profile_data = default_profile_data

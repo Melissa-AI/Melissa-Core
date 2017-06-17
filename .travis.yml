@@ -7,10 +7,11 @@ install:
   - "cp data/memory.db.default data/memory.db"
   - pip install -r ./requirements-dev.txt
 script:
-  - flake8
-  - "python -m pytest 
+  - "python -m pytest
      --cov=melissa \
      --cov=start \
-     --cov-config=.coveragerc"
+     --cov-config=.coveragerc \
+     --flake8 \
+     -vv"
 after_success:
   - bash <(curl -s https://codecov.io/bash)

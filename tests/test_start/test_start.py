@@ -10,6 +10,7 @@ import pytest
 
 M_TEXT = 'query_text'
 NOT_WORKING_ON_FULL_TEST = "Not working on full test."
+START_MODULE_REMOVED = 'start module removed'
 
 
 @pytest.mark.xfail(reason=NOT_WORKING_ON_FULL_TEST)
@@ -38,6 +39,7 @@ def test_import_module():
         import start  # NOQA
 
 
+@pytest.mark.xfail(reason=START_MODULE_REMOVED)
 @pytest.mark.parametrize(
     'platform, m_stt_side_effect',
     product(

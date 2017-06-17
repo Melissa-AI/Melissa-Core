@@ -4,7 +4,7 @@
 [![codecov.io](http://codecov.io/github/Melissa-AI/Melissa-Core/coverage.svg?branch=master)](http://codecov.io/github/Melissa-AI/Melissa-Core?branch=master)
 [![Join the chat at https://gitter.im/Melissa-AI/Melissa-Core](https://badges.gitter.im/Melissa-AI/Melissa-Core.svg)](https://gitter.im/Melissa-AI/Melissa-Core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Melissa is a <del>virtual</del> assistant for OS X, Windows and Linux systems. She currently uses either Google's speech-to-text engine or CMU's Sphinx, OS X's `say` command or Linux's `espeak` command along with some magical scripting which makes her alive, developed by [Tanay Pant](http://tanaypant.com) and a group of sorcerers.
+Melissa is a <del>virtual</del> assistant for OS X, Windows and Linux systems. She currently uses Google Chrome's speech-to-text engine, OS X's `say` command, Linux's `espeak` command or Ivona TTS along with some magical scripting which makes her alive, developed by [Tanay Pant](http://tanaypant.com) and a group of sorcerers. The Web UI for Melissa has been designed by [Nakul Saxena](http://nakulsaxena.in).
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=r1yoaq3BcUA"><img src="http://i.imgur.com/OmsI07v.gif"></a>

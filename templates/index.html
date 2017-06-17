@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Melisandre | Melissa-Core</title>
+    <link  rel="stylesheet" href="{{ url_for('static', filename = 'css/all.css') }}" type="text/css" />
+</head>
+
+<body>
+    <audio>
+        <source src="{{ url_for('static', filename = 'sounds/multimedia_rollover_046.mp3') }}" type="audio/mpeg">
+        <source src="{{ url_for('static', filename = 'sounds/multimedia_rollover_048.mp3') }}" type="audio/mpeg">
+        <source src="{{ url_for('static', filename = 'sounds/osd-text-10.mp3') }}" type="audio/mpeg">
+        <source src="{{ url_for('static', filename = 'sounds/robot_movement_6.mp3') }}" type="audio/mpeg">
+        <source src="{{ url_for('static', filename = 'sounds/servo_motor.mp3') }}" type="audio/mpeg">
+        <source src="{{ url_for('static', filename = 'sounds/simple_beep_nav.mp3') }}" type="audio/mpeg">
+        <source src="{{ url_for('static', filename = 'sounds/slanesh__bip.mp3') }}" type="audio/mpeg">
+        <source src="{{ url_for('static', filename = 'sounds/soft_chime_beep.mp3') }}" type="audio/mpeg">
+        <source src="{{ url_for('static', filename = 'sounds/tranzistor_nav.mp3') }}" type="audio/mpeg">
+    </audio>   
+    <div id="wrapper" onclick="jarvisRecog();">
+        <div class="soundCont"></div>
+        <div class="soundCont1"></div>
+        <div class="fauxBody"></div>
+        <div class="fauxBody1"></div>
+        <div class="fauxBody2"></div>
+        <div class="welcomeRings">        
+            <div class="welcomeRing3"></div>
+            <div class="welcomeRing2"></div>
+            <div class="welcomeRing1"></div>
+            <div class="lockIcon" onclick="unlockApp();"></div>
+        </div>
+        <div class="sineGraph"></div>
+        <div class="bgAnimRing">
+            <div class="bgAnimRing3"></div>
+            <div class="bgAnimRing2"></div>
+            <div class="bgAnimRing1"></div>
+        </div>
+        <div class="infoText"></div>
+        <div class="sideBarUl">
+            <ul>
+                <li value="0">Repository</li>       
+            </ul>
+        </div>
+        <div id="imgGalCont" onclick="speechHandler()">
+            <div id="imgGalIn">
+
+            </div>
+			<div id="imgGalMid">
+
+            </div>
+            <div id="imgGalOut"></div>
+
+        </div>
+        <div class="footerImg">
+            <div class="semText"></div>
+            <div class="juryText"></div>
+        </div>
+        <div class="footerGraph">
+            <div class="footerGraphUnit"></div>
+            <div class="footerGraphUnit"></div>
+            <div class="footerGraphUnit"></div>
+            <div class="footerGraphUnit"></div>
+            <div class="footerGraphUnit"></div>
+            <div class="footerGraphUnit"></div>
+            <div class="footerGraphUnit"></div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/socket.io.min.js') }}"></script>
+
+<script>
+var socket = io.connect('http://' + document.domain + ':' + location.port);
+function speechHandler(){
+	var recognition = new (webkitSpeechRecognition)();
+	recognition.lang = 'en-US';
+	recognition.interimResults = false;
+	recognition.maxAlternatives = 5;
+	recognition.start();
+
+	recognition.onresult = function(event) {
+	    $('#imgGalIn').airport([event.results[0][0].transcript]);
+	    recognition.stop();
+		socket.emit('user speaks', {data: event.results[0][0].transcript});
+
+	};
+}
+
+socket.on('melissa replies', function(test) {
+	$('#imgGalMid').airport([test]);
+});
+</script>
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery-2.1.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/all.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/transit.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery.airport-1.1.source.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery.airport-1.1x.source.js') }}"></script>
+</html>
