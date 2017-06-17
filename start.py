@@ -17,11 +17,7 @@ def main():
         if sys.platform == 'darwin':
             subprocess.call(['afplay', 'data/snowboy_resources/ding.wav'])
         elif sys.platform.startswith('linux') or sys.platform == 'win32':
-            try:
-                subprocess.call(['mpg123', 'data/snowboy_resources/ding.wav'])
-            except OSError:
-                subprocess.call(
-                    ['mpg123', 'data/snowboy_resources/ding.wav'], shell=True)
+            subprocess.call(['mpg123', 'data/snowboy_resources/ding.wav'])
 
         text = stt()
 
