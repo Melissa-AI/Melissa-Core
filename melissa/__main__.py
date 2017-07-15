@@ -9,9 +9,6 @@ from melissa.brain import query
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-data = load_profile(True)
-tts('Welcome ' + data['name'] + ', how can I help you?')
-
 
 @app.route("/")
 def hello():
@@ -30,4 +27,12 @@ def handle_json(json):
     else:
         query(speech_text)
 
-socketio.run(app)
+
+def main():
+    data = load_profile(True)
+    tts('Welcome ' + data['name'] + ', how can I help you?')
+    socketio.run(app)
+
+
+if __name__ == '__main__':
+    main()

@@ -4,7 +4,6 @@ python:
 sudo: true
 install:
   - "curl -O https://raw.githubusercontent.com/Melissa-AI/Melissa-Core/master/setup/travis-build-core.sh && chmod +x travis-build-core.sh && ./travis-build-core.sh"
-  - "cp data/memory.db.default data/memory.db"
   - pip install -r ./requirements-dev.txt
 script:
   - "python -m pytest
