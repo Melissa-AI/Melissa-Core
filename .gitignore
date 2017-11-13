@@ -6,3 +6,5 @@ portaudio/
 pywapi-0.3.8/
 *~
 venv/
+melissa.egg-info/
+dist/
