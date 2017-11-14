@@ -14,7 +14,7 @@ except IOError:
 
 setup(
     name="melissa",
-    version="0.1.0",
+    version="0.0.1",
     description=description,
     long_description=long_description,
     author='Tanay Pant',
