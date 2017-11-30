@@ -1,0 +1,10 @@
+gcc
+automake
+autoconf
+libtool
+bison
+swig
+python-dev
+libpulse-dev
+espeak
+multimedia-jack

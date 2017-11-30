@@ -1,0 +1,6 @@
+recursive-include melissa data memory.db.default
+recursive-include melissa templates index.html
+recursive-include melissa static css *.css *.otf
+recursive-include melissa static images *.png
+recursive-include melissa static sounds *.js
+recursive-include melissa static *.mp3
