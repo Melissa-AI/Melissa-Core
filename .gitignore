@@ -8,4 +8,5 @@ pywapi-0.3.8/
 venv/
 melissa.egg-info/
 dist/
+melissa/data/memory.db
 build/
