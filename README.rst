@@ -1,7 +1,7 @@
 Melissa
 -------
 
-| |Build Status| |Codacy Badge| |codecov.io| |Join the chat at https://gitter.im/Melissa-AI/Melissa-Core|
+| |Build Status| |Codacy Badge| |codecov.io|
 
 |
 
