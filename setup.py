@@ -34,7 +34,7 @@ setup(
           'oauthlib==1.0.3',
           'requests-oauthlib==0.5.0', 
           'eventlet==0.20.0', 
-          'Flask==0.12',
+          'Flask==1.0',
           'Flask-SocketIO==2.8.6',    
           'python-socketio==1.6.1',
           'beautifulsoup4==4.4.1',  
