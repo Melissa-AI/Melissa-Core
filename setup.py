@@ -38,7 +38,7 @@ setup(
           'Flask-SocketIO==2.8.6',    
           'python-socketio==1.6.1',
           'beautifulsoup4==4.4.1',  
-          'requests==2.8.1', 
+          'requests==2.20.0', 
           'wikipedia==1.4.0',
           'pyicloud==0.9.1', 
           'HoroscopeGenerator==0.1.8',

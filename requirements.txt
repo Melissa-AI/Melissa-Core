@@ -10,7 +10,7 @@ python-socketio==1.6.1
 
 # Business News Reader
 beautifulsoup4==4.4.1
-requests==2.8.1
+requests==2.20.0
 
 # Define Subject
 wikipedia==1.4.0
