@@ -44,7 +44,7 @@ setup(
           'HoroscopeGenerator==0.1.8',
           'imgurpython==1.1.6', 
           'netifaces==0.10.5', 
-          'psutil==4.3.0',
+          'psutil==5.6.6',
           'tweepy==3.5.0', 
           'telepot==4.1', 
           'pygame>=1.9.2b6',
